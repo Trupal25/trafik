@@ -1,0 +1,11 @@
+[
+  "latitude",
+  "longitude",
+  "hour",
+  "day_of_week",
+  "month",
+  "zone",
+  "junction",
+  "police_station",
+  "priority"
+]

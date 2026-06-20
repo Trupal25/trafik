@@ -1,0 +1,21 @@
+{
+  "accuracy": 0.4916,
+  "weighted_f1": 0.5226,
+  "per_class_f1": {
+    "accident": 0.283,
+    "congestion": 0.5405,
+    "construction": 0.4631,
+    "debris": 0.25,
+    "fog_low_visibility": 0.0,
+    "others": 0.1989,
+    "pot_holes": 0.5507,
+    "procession": 0.303,
+    "protest": 0.0,
+    "public_event": 0.4,
+    "road_conditions": 0.2737,
+    "tree_fall": 0.4025,
+    "vehicle_breakdown": 0.6086,
+    "vip_movement": 0.0,
+    "water_logging": 0.5063
+  }
+}
