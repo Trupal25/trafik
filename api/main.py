@@ -110,9 +110,13 @@ def _try_load_model() -> None:
     try:
         from ml import train_event_model  # type: ignore[import-untyped]  # noqa: F401
 
+        # Accept either compressed (.pkl.gz) or uncompressed (.pkl)
+        model_gz = _MODEL_DIR / "event_classifier.pkl.gz"
         model_pkl = _MODEL_DIR / "event_classifier.pkl"
-        if not model_pkl.is_file():
-            raise FileNotFoundError(f"Model file not found: {model_pkl}")
+        if not (model_gz.is_file() or model_pkl.is_file()):
+            raise FileNotFoundError(
+                f"Model file not found. Expected {model_gz} or {model_pkl}"
+            )
 
         _state["model_loaded"] = True
         _state["model_error"] = None
@@ -174,11 +178,13 @@ def _load_forecast_models() -> None:
     if rf_metrics_path.is_file():
         try:
             rf_metrics = _load_json_file(rf_metrics_path)
+            event_classifier_gz = _MODEL_DIR / "event_classifier.pkl.gz"
             event_classifier_path = _MODEL_DIR / "event_classifier.pkl"
             trained_at = None
-            if event_classifier_path.is_file():
+            ref_path = event_classifier_gz if event_classifier_gz.is_file() else event_classifier_path
+            if ref_path.is_file():
                 trained_at = datetime.fromtimestamp(
-                    event_classifier_path.stat().st_mtime, tz=timezone.utc
+                    ref_path.stat().st_mtime, tz=timezone.utc
                 ).isoformat()
             
             _state["forecast_models"]["random_forest"] = {

@@ -1,102 +1,102 @@
 {
   "model_name": "lstm_congestion",
-  "trained_at": "2026-06-21T12:58:37.238641+00:00",
+  "trained_at": "2026-06-21T15:55:29.010847+00:00",
   "metrics": {
-    "mae": 1.927,
-    "rmse": 3.638,
-    "r2": 0.155,
+    "mae": 1.914,
+    "rmse": 3.626,
+    "r2": 0.16,
     "surge_threshold": 3,
-    "surge_precision": 0.664,
-    "surge_recall": 0.641,
-    "surge_f1": 0.653,
+    "surge_precision": 0.667,
+    "surge_recall": 0.637,
+    "surge_f1": 0.651,
     "surge_accuracy": 0.737,
     "test_samples": 16488,
     "surge_rate": 0.386,
     "description": "24h-ahead hourly forecast from 168h input window",
-    "epochs_trained": 191,
-    "final_val_loss": 0.2154,
+    "epochs_trained": 181,
+    "final_val_loss": 0.2155,
     "backend": "sklearn_mlp"
   },
   "test_predictions": [
     {
       "timestamp": "16416",
       "actual": 0.0,
-      "predicted": 0.5
+      "predicted": 0.52
     },
     {
       "timestamp": "16417",
       "actual": 0.0,
-      "predicted": 1.7
+      "predicted": 1.34
     },
     {
       "timestamp": "16418",
       "actual": 0.0,
-      "predicted": 2.26
+      "predicted": 1.9
     },
     {
       "timestamp": "16419",
       "actual": 2.0,
-      "predicted": 2.81
+      "predicted": 2.99
     },
     {
       "timestamp": "16420",
       "actual": 2.0,
-      "predicted": 2.45
+      "predicted": 2.59
     },
     {
       "timestamp": "16421",
       "actual": 5.0,
-      "predicted": 3.96
+      "predicted": 3.62
     },
     {
       "timestamp": "16422",
       "actual": 2.0,
-      "predicted": 0.45
+      "predicted": 0.9
     },
     {
       "timestamp": "16423",
       "actual": 4.0,
-      "predicted": 0.01
+      "predicted": 0.45
     },
     {
       "timestamp": "16424",
       "actual": 2.0,
-      "predicted": 0.35
+      "predicted": 0.68
     },
     {
       "timestamp": "16425",
       "actual": 1.0,
-      "predicted": 0.66
+      "predicted": 0.99
     },
     {
       "timestamp": "16426",
       "actual": 2.0,
-      "predicted": 3.68
+      "predicted": 3.22
     },
     {
       "timestamp": "16427",
       "actual": 3.0,
-      "predicted": 1.93
+      "predicted": 2.1
     },
     {
       "timestamp": "16428",
       "actual": 2.0,
-      "predicted": 1.28
+      "predicted": 1.33
     },
     {
       "timestamp": "16429",
       "actual": 0.0,
-      "predicted": 2.62
+      "predicted": 2.09
     },
     {
       "timestamp": "16430",
       "actual": 1.0,
-      "predicted": 3.91
+      "predicted": 3.57
     },
     {
       "timestamp": "16431",
       "actual": 0.0,
-      "predicted": 5.6
+      "predicted": 5.41
     },
     {
       "timestamp": "16432",
@@ -106,22 +106,22 @@
     {
       "timestamp": "16433",
       "actual": 0.0,
-      "predicted": 7.01
+      "predicted": 7.03
     },
     {
       "timestamp": "16434",
       "actual": 1.0,
-      "predicted": 4.23
+      "predicted": 4.38
     },
     {
       "timestamp": "16435",
       "actual": 0.0,
-      "predicted": 2.68
+      "predicted": 3.13
     },
     {
       "timestamp": "16436",
       "actual": 1.0,
-      "predicted": 0.19
+      "predicted": 0.82
     },
     {
       "timestamp": "16437",
@@ -156,17 +156,17 @@
     {
       "timestamp": "16443",
       "actual": 2.0,
-      "predicted": 0.02
+      "predicted": 0.35
     },
     {
       "timestamp": "16444",
       "actual": 5.0,
-      "predicted": 1.85
+      "predicted": 1.89
     },
     {
       "timestamp": "16445",
       "actual": 2.0,
-      "predicted": 4.93
+      "predicted": 4.56
     },
     {
       "timestamp": "16446",
@@ -176,67 +176,67 @@
     {
       "timestamp": "16447",
       "actual": 2.0,
-      "predicted": 0.02
+      "predicted": 0.24
     },
     {
       "timestamp": "16448",
       "actual": 1.0,
-      "predicted": 2.01
+      "predicted": 2.26
     },
     {
       "timestamp": "16449",
       "actual": 2.0,
-      "predicted": 0.71
+      "predicted": 0.81
     },
     {
       "timestamp": "16450",
       "actual": 3.0,
-      "predicted": 5.02
+      "predicted": 4.59
     },
     {
       "timestamp": "16451",
       "actual": 2.0,
-      "predicted": 3.04
+      "predicted": 2.98
     },
     {
       "timestamp": "16452",
       "actual": 0.0,
-      "predicted": 3.52
+      "predicted": 3.35
     },
     {
       "timestamp": "16453",
       "actual": 1.0,
-      "predicted": 5.12
+      "predicted": 4.39
     },
     {
       "timestamp": "16454",
       "actual": 0.0,
-      "predicted": 6.03
+      "predicted": 5.48
     },
     {
       "timestamp": "16455",
       "actual": 2.0,
-      "predicted": 7.73
+      "predicted": 7.35
     },
     {
       "timestamp": "16456",
       "actual": 0.0,
-      "predicted": 9.13
+      "predicted": 8.96
     },
     {
       "timestamp": "16457",
       "actual": 1.0,
-      "predicted": 4.2
+      "predicted": 4.06
     },
     {
       "timestamp": "16458",
       "actual": 0.0,
-      "predicted": 1.98
+      "predicted": 2.04
     },
     {
       "timestamp": "16459",
       "actual": 1.0,
-      "predicted": 0.86
+      "predicted": 1.27
     },
     {
       "timestamp": "16460",
@@ -261,7 +261,7 @@
     {
       "timestamp": "16464",
       "actual": 0.0,
-      "predicted": 0.0
+      "predicted": 0.19
     },
     {
       "timestamp": "16465",
@@ -271,27 +271,27 @@
     {
       "timestamp": "16466",
       "actual": 2.0,
-      "predicted": 1.67
+      "predicted": 1.63
     },
     {
       "timestamp": "16467",
       "actual": 5.0,
-      "predicted": 1.85
+      "predicted": 2.13
     },
     {
       "timestamp": "16468",
       "actual": 2.0,
-      "predicted": 0.0
+      "predicted": 0.23
     },
     {
       "timestamp": "16469",
       "actual": 4.0,
-      "predicted": 3.59
+      "predicted": 3.81
     },
     {
       "timestamp": "16470",
       "actual": 2.0,
-      "predicted": 0.0
+      "predicted": 0.13
     },
     {
       "timestamp": "16471",
@@ -301,7 +301,7 @@
     {
       "timestamp": "16472",
       "actual": 2.0,
-      "predicted": 0.48
+      "predicted": 0.83
     },
     {
       "timestamp": "16473",
@@ -316,37 +316,37 @@
     {
       "timestamp": "16475",
       "actual": 0.0,
-      "predicted": 1.6
+      "predicted": 1.95
     },
     {
       "timestamp": "16476",
       "actual": 1.0,
-      "predicted": 3.39
+      "predicted": 3.5
     },
     {
       "timestamp": "16477",
       "actual": 0.0,
-      "predicted": 4.04
+      "predicted": 3.96
     },
     {
       "timestamp": "16478",
       "actual": 2.0,
-      "predicted": 3.35
+      "predicted": 3.22
     },
     {
       "timestamp": "16479",
       "actual": 0.0,
-      "predicted": 3.16
+      "predicted": 3.04
     },
     {
       "timestamp": "16480",
       "actual": 1.0,
-      "predicted": 3.32
+      "predicted": 3.19
     },
     {
       "timestamp": "16481",
       "actual": 0.0,
-      "predicted": 0.17
+      "predicted": 0.16
     },
     {
       "timestamp": "16482",
@@ -356,7 +356,7 @@
     {
       "timestamp": "16483",
       "actual": 0.0,
-      "predicted": 0.0
+      "predicted": 0.11
     },
     {
       "timestamp": "16484",
@@ -366,64 +366,64 @@
     {
       "timestamp": "16485",
       "actual": 2.0,
-      "predicted": 0.08
+      "predicted": 0.49
     },
     {
       "timestamp": "16486",
       "actual": 0.0,
-      "predicted": 1.08
+      "predicted": 1.4
     },
     {
       "timestamp": "16487",
       "actual": 0.0,
-      "predicted": 0.66
+      "predicted": 0.94
     }
   ],
   "forecast_24h": [
     {
       "hour_offset": 1,
-      "predicted_count": 0.0,
+      "predicted_count": 0.1,
       "surge_probability": 0.01
     },
     {
       "hour_offset": 2,
+      "predicted_count": 1.5,
+      "surge_probability": 0.1
+    },
+    {
+      "hour_offset": 3,
+      "predicted_count": 2.9,
+      "surge_probability": 0.46
+    },
+    {
+      "hour_offset": 4,
+      "predicted_count": 4.9,
+      "surge_probability": 0.94
+    },
+    {
+      "hour_offset": 5,
+      "predicted_count": 1.8,
+      "surge_probability": 0.13
+    },
+    {
+      "hour_offset": 6,
       "predicted_count": 1.8,
       "surge_probability": 0.14
     },
     {
-      "hour_offset": 3,
-      "predicted_count": 3.3,
-      "surge_probability": 0.6
-    },
-    {
-      "hour_offset": 4,
-      "predicted_count": 4.7,
-      "surge_probability": 0.93
-    },
-    {
-      "hour_offset": 5,
-      "predicted_count": 1.6,
-      "surge_probability": 0.12
-    },
-    {
-      "hour_offset": 6,
-      "predicted_count": 1.7,
-      "surge_probability": 0.12
-    },
-    {
       "hour_offset": 7,
-      "predicted_count": 3.8,
-      "surge_probability": 0.77
+      "predicted_count": 3.9,
+      "surge_probability": 0.79
     },
     {
       "hour_offset": 8,
-      "predicted_count": 2.2,
-      "surge_probability": 0.24
+      "predicted_count": 2.3,
+      "surge_probability": 0.26
     },
     {
       "hour_offset": 9,
       "predicted_count": 3.0,
-      "surge_probability": 0.5
+      "surge_probability": 0.51
     },
     {
       "hour_offset": 10,
@@ -432,8 +432,8 @@
     },
     {
       "hour_offset": 11,
-      "predicted_count": 3.5,
-      "surge_probability": 0.69
+      "predicted_count": 3.3,
+      "surge_probability": 0.62
     },
     {
       "hour_offset": 12,
@@ -442,18 +442,18 @@
     },
     {
       "hour_offset": 13,
-      "predicted_count": 7.6,
+      "predicted_count": 7.4,
       "surge_probability": 1.0
     },
     {
       "hour_offset": 14,
-      "predicted_count": 3.2,
-      "surge_probability": 0.56
+      "predicted_count": 2.6,
+      "surge_probability": 0.34
     },
     {
       "hour_offset": 15,
-      "predicted_count": 0.9,
-      "surge_probability": 0.04
+      "predicted_count": 0.5,
+      "surge_probability": 0.02
     },
     {
       "hour_offset": 16,

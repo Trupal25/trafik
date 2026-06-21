@@ -1,12 +1,12 @@
 {
-  "mae": 1.535,
-  "rmse": 2.942,
-  "r2": 0.458,
+  "mae": 1.591,
+  "rmse": 2.975,
+  "r2": 0.446,
   "surge_threshold": 3,
-  "surge_precision": 0.781,
-  "surge_recall": 0.7,
-  "surge_f1": 0.738,
-  "surge_accuracy": 0.813,
+  "surge_precision": 0.788,
+  "surge_recall": 0.668,
+  "surge_f1": 0.723,
+  "surge_accuracy": 0.807,
   "test_samples": 663,
   "surge_rate": 0.377
 }

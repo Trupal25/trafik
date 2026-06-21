@@ -1,6 +1,6 @@
 {
   "model_name": "hybrid_hotspot",
-  "trained_at": "2026-06-21T12:58:21.687555+00:00",
+  "trained_at": "2026-06-21T15:55:09.734538+00:00",
   "metrics": {
     "persistence_accuracy": 0.053,
     "description": "Junction-level hotspot risk ranking (RF causes + impact scores + trend rules)",

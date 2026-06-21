@@ -11,7 +11,8 @@ build/
 .env
 
 # ML artifacts
-ml/models/*.pkl
+# Large uncompressed model — use .pkl.gz instead (tracked)
+ml/models/event_classifier.pkl
 
 # Data (large files)
 data/raw/

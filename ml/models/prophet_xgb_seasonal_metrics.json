@@ -1,7 +1,7 @@
 {
-  "mae": 273.33,
-  "rmse": 292.2,
-  "r2": -86.54,
+  "mae": 159.02,
+  "rmse": 180.15,
+  "r2": -32.275,
   "description": "Daily incident volume (Prophet baseline + XGBoost residual)",
   "test_samples": 31
 }

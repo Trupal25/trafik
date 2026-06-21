@@ -1,6 +1,6 @@
 {
   "model_name": "lightgbm_officer",
-  "trained_at": "2026-06-21T12:57:56.764275+00:00",
+  "trained_at": "2026-06-21T15:54:54.749767+00:00",
   "metrics": {
     "mae": 10.059,
     "rmse": 23.453,

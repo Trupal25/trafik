@@ -21,7 +21,7 @@ PYTHON   ?= python
 ML_DIR   := ml
 MODEL_DIR := ml/models
 EVENTS   := data/processed/events_clean.csv
-MPLCONFIGDIR ?= /tmp/astram-matplotlib
+MPLCONFIGDIR ?= $(TEMP)/astram-matplotlib
 export MPLCONFIGDIR
 
 # ──────────────────────────────────────────────
@@ -145,24 +145,22 @@ train-tree: train-xgboost train-lightgbm train-prophet train-hybrid
 # ──────────────────────────────────────────────
 clean-ml:
 	@echo "  Cleaning ml/models/ ..."
-	@rm -rf $(MODEL_DIR)/xgboost_surge
-	@rm -rf $(MODEL_DIR)/lightgbm_officer
-	@rm -rf $(MODEL_DIR)/prophet_xgb_seasonal
-	@rm -rf $(MODEL_DIR)/hybrid_hotspot
-	@rm -rf $(MODEL_DIR)/lstm_congestion
+	@if exist "$(MODEL_DIR)\xgboost_surge" rmdir /s /q "$(MODEL_DIR)\xgboost_surge"
+	@if exist "$(MODEL_DIR)\lightgbm_officer" rmdir /s /q "$(MODEL_DIR)\lightgbm_officer"
+	@if exist "$(MODEL_DIR)\prophet_xgb_seasonal" rmdir /s /q "$(MODEL_DIR)\prophet_xgb_seasonal"
+	@if exist "$(MODEL_DIR)\hybrid_hotspot" rmdir /s /q "$(MODEL_DIR)\hybrid_hotspot"
+	@if exist "$(MODEL_DIR)\lstm_congestion" rmdir /s /q "$(MODEL_DIR)\lstm_congestion"
 	@echo "  Done."
 
 status:
 	@echo ""
 	@echo "  UrbanPulse AI — Model Artifact Status"
 	@echo "  ─────────────────────────────────────"
-	@for model in xgboost_surge lightgbm_officer prophet_xgb_seasonal hybrid_hotspot lstm_congestion; do \
-		if [ -f "$(MODEL_DIR)/$${model}_forecast.json" ]; then \
-			echo "  [OK] $$model — trained"; \
-		else \
-			echo "  [--] $$model — not trained"; \
-		fi; \
-	done
+	@if exist "$(MODEL_DIR)\xgboost_surge_forecast.json" (echo   [OK] xgboost_surge — trained) else (echo   [--] xgboost_surge — not trained)
+	@if exist "$(MODEL_DIR)\lightgbm_officer_forecast.json" (echo   [OK] lightgbm_officer — trained) else (echo   [--] lightgbm_officer — not trained)
+	@if exist "$(MODEL_DIR)\prophet_xgb_seasonal_forecast.json" (echo   [OK] prophet_xgb_seasonal — trained) else (echo   [--] prophet_xgb_seasonal — not trained)
+	@if exist "$(MODEL_DIR)\hybrid_hotspot_forecast.json" (echo   [OK] hybrid_hotspot — trained) else (echo   [--] hybrid_hotspot — not trained)
+	@if exist "$(MODEL_DIR)\lstm_congestion_forecast.json" (echo   [OK] lstm_congestion — trained) else (echo   [--] lstm_congestion — not trained)
 	@echo ""
 
 # Ensure the model directory exists before training

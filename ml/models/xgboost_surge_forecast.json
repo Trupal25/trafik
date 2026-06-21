@@ -1,15 +1,15 @@
 {
   "model_name": "xgboost_surge",
-  "trained_at": "2026-06-21T12:57:53.657268+00:00",
+  "trained_at": "2026-06-21T15:54:49.384064+00:00",
   "metrics": {
-    "mae": 1.535,
-    "rmse": 2.942,
-    "r2": 0.458,
+    "mae": 1.591,
+    "rmse": 2.975,
+    "r2": 0.446,
     "surge_threshold": 3,
-    "surge_precision": 0.781,
-    "surge_recall": 0.7,
-    "surge_f1": 0.738,
-    "surge_accuracy": 0.813,
+    "surge_precision": 0.788,
+    "surge_recall": 0.668,
+    "surge_f1": 0.723,
+    "surge_accuracy": 0.807,
     "test_samples": 663,
     "surge_rate": 0.377
   },
@@ -27,257 +27,257 @@
     {
       "timestamp": "2024-04-05T17:00:00+00:00",
       "actual": 1.0,
-      "predicted": 0.55
+      "predicted": 0.53
     },
     {
       "timestamp": "2024-04-05T18:00:00+00:00",
       "actual": 8.0,
-      "predicted": 2.74
+      "predicted": 2.52
     },
     {
       "timestamp": "2024-04-05T19:00:00+00:00",
       "actual": 4.0,
-      "predicted": 4.78
+      "predicted": 4.37
     },
     {
       "timestamp": "2024-04-05T20:00:00+00:00",
       "actual": 7.0,
-      "predicted": 4.71
+      "predicted": 3.91
     },
     {
       "timestamp": "2024-04-05T21:00:00+00:00",
       "actual": 5.0,
-      "predicted": 6.29
+      "predicted": 4.66
     },
     {
       "timestamp": "2024-04-05T22:00:00+00:00",
       "actual": 7.0,
-      "predicted": 2.97
+      "predicted": 3.47
     },
     {
       "timestamp": "2024-04-05T23:00:00+00:00",
       "actual": 2.0,
-      "predicted": 5.36
+      "predicted": 5.07
     },
     {
       "timestamp": "2024-04-06T01:00:00+00:00",
       "actual": 2.0,
-      "predicted": 3.35
+      "predicted": 2.43
     },
     {
       "timestamp": "2024-04-06T02:00:00+00:00",
       "actual": 2.0,
-      "predicted": 2.77
+      "predicted": 2.72
     },
     {
       "timestamp": "2024-04-06T03:00:00+00:00",
       "actual": 4.0,
-      "predicted": 3.01
+      "predicted": 2.95
     },
     {
       "timestamp": "2024-04-06T04:00:00+00:00",
       "actual": 5.0,
-      "predicted": 3.94
+      "predicted": 3.42
     },
     {
       "timestamp": "2024-04-06T05:00:00+00:00",
       "actual": 7.0,
-      "predicted": 4.01
+      "predicted": 3.77
     },
     {
       "timestamp": "2024-04-06T06:00:00+00:00",
       "actual": 33.0,
-      "predicted": 5.17
+      "predicted": 4.46
     },
     {
       "timestamp": "2024-04-06T07:00:00+00:00",
       "actual": 34.0,
-      "predicted": 22.58
+      "predicted": 21.73
     },
     {
       "timestamp": "2024-04-06T08:00:00+00:00",
       "actual": 16.0,
-      "predicted": 13.05
+      "predicted": 19.79
     },
     {
       "timestamp": "2024-04-06T09:00:00+00:00",
       "actual": 2.0,
-      "predicted": 9.19
+      "predicted": 14.52
     },
     {
       "timestamp": "2024-04-06T10:00:00+00:00",
       "actual": 1.0,
-      "predicted": 6.39
+      "predicted": 8.53
     },
     {
       "timestamp": "2024-04-06T11:00:00+00:00",
       "actual": 0.0,
-      "predicted": 1.02
+      "predicted": 1.0
     },
     {
       "timestamp": "2024-04-06T12:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.68
+      "predicted": 0.77
     },
     {
       "timestamp": "2024-04-06T13:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.29
+      "predicted": 0.34
     },
     {
       "timestamp": "2024-04-06T14:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.23
+      "predicted": 0.33
     },
     {
       "timestamp": "2024-04-06T15:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.23
+      "predicted": 0.33
     },
     {
       "timestamp": "2024-04-06T16:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.23
+      "predicted": 0.33
     },
     {
       "timestamp": "2024-04-06T17:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.46
+      "predicted": 0.5
     },
     {
       "timestamp": "2024-04-06T18:00:00+00:00",
       "actual": 5.0,
-      "predicted": 2.61
+      "predicted": 3.02
     },
     {
       "timestamp": "2024-04-06T19:00:00+00:00",
       "actual": 9.0,
-      "predicted": 4.21
+      "predicted": 3.92
     },
     {
       "timestamp": "2024-04-06T20:00:00+00:00",
       "actual": 2.0,
-      "predicted": 4.9
+      "predicted": 4.33
     },
     {
       "timestamp": "2024-04-06T21:00:00+00:00",
       "actual": 5.0,
-      "predicted": 4.7
+      "predicted": 3.84
     },
     {
       "timestamp": "2024-04-06T22:00:00+00:00",
       "actual": 6.0,
-      "predicted": 3.21
+      "predicted": 3.56
     },
     {
       "timestamp": "2024-04-06T23:00:00+00:00",
       "actual": 7.0,
-      "predicted": 3.84
+      "predicted": 3.51
     },
     {
       "timestamp": "2024-04-07T01:00:00+00:00",
       "actual": 5.0,
-      "predicted": 6.36
+      "predicted": 5.76
     },
     {
       "timestamp": "2024-04-07T02:00:00+00:00",
       "actual": 6.0,
-      "predicted": 3.13
+      "predicted": 3.25
     },
     {
       "timestamp": "2024-04-07T03:00:00+00:00",
       "actual": 3.0,
-      "predicted": 5.22
+      "predicted": 3.84
     },
     {
       "timestamp": "2024-04-07T04:00:00+00:00",
       "actual": 7.0,
-      "predicted": 4.21
+      "predicted": 4.0
     },
     {
       "timestamp": "2024-04-07T05:00:00+00:00",
       "actual": 6.0,
-      "predicted": 5.75
+      "predicted": 4.35
     },
     {
       "timestamp": "2024-04-07T06:00:00+00:00",
       "actual": 9.0,
-      "predicted": 5.16
+      "predicted": 4.15
     },
     {
       "timestamp": "2024-04-07T07:00:00+00:00",
       "actual": 6.0,
-      "predicted": 5.21
+      "predicted": 5.24
     },
     {
       "timestamp": "2024-04-07T08:00:00+00:00",
       "actual": 5.0,
-      "predicted": 3.45
+      "predicted": 3.64
     },
     {
       "timestamp": "2024-04-07T09:00:00+00:00",
       "actual": 6.0,
-      "predicted": 1.36
+      "predicted": 1.79
     },
     {
       "timestamp": "2024-04-07T10:00:00+00:00",
       "actual": 1.0,
-      "predicted": 1.23
+      "predicted": 1.48
     },
     {
       "timestamp": "2024-04-07T11:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.64
+      "predicted": 1.19
     },
     {
       "timestamp": "2024-04-07T12:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.55
+      "predicted": 0.79
     },
     {
       "timestamp": "2024-04-07T13:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.22
+      "predicted": 0.36
     },
     {
       "timestamp": "2024-04-07T14:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.18
+      "predicted": 0.34
     },
     {
       "timestamp": "2024-04-07T15:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.18
+      "predicted": 0.34
     },
     {
       "timestamp": "2024-04-07T16:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.17
+      "predicted": 0.3
     },
     {
       "timestamp": "2024-04-07T17:00:00+00:00",
       "actual": 0.0,
-      "predicted": 1.05
+      "predicted": 1.16
     },
     {
       "timestamp": "2024-04-07T18:00:00+00:00",
       "actual": 2.0,
-      "predicted": 2.22
+      "predicted": 1.91
     },
     {
       "timestamp": "2024-04-07T19:00:00+00:00",
       "actual": 2.0,
-      "predicted": 3.96
+      "predicted": 3.35
     },
     {
       "timestamp": "2024-04-07T20:00:00+00:00",
       "actual": 5.0,
-      "predicted": 3.6
+      "predicted": 2.87
     },
     {
       "timestamp": "2024-04-07T21:00:00+00:00",
       "actual": 2.0,
-      "predicted": 3.24
+      "predicted": 3.07
     },
     {
       "timestamp": "2024-04-07T22:00:00+00:00",
@@ -292,254 +292,254 @@
     {
       "timestamp": "2024-04-08T01:00:00+00:00",
       "actual": 2.0,
-      "predicted": 2.93
+      "predicted": 2.5
     },
     {
       "timestamp": "2024-04-08T02:00:00+00:00",
       "actual": 3.0,
-      "predicted": 2.61
+      "predicted": 2.64
     },
     {
       "timestamp": "2024-04-08T03:00:00+00:00",
       "actual": 2.0,
-      "predicted": 2.07
+      "predicted": 2.02
     },
     {
       "timestamp": "2024-04-08T04:00:00+00:00",
       "actual": 0.0,
-      "predicted": 3.41
+      "predicted": 2.47
     },
     {
       "timestamp": "2024-04-08T05:00:00+00:00",
       "actual": 1.0,
-      "predicted": 2.8
+      "predicted": 2.42
     },
     {
       "timestamp": "2024-04-08T06:00:00+00:00",
       "actual": 0.0,
-      "predicted": 2.54
+      "predicted": 2.85
     },
     {
       "timestamp": "2024-04-08T07:00:00+00:00",
       "actual": 2.0,
-      "predicted": 1.67
+      "predicted": 2.13
     },
     {
       "timestamp": "2024-04-08T08:00:00+00:00",
       "actual": 0.0,
-      "predicted": 1.55
+      "predicted": 1.5
     },
     {
       "timestamp": "2024-04-08T09:00:00+00:00",
       "actual": 1.0,
-      "predicted": 0.97
+      "predicted": 1.36
     },
     {
       "timestamp": "2024-04-08T10:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.33
+      "predicted": 0.41
     },
     {
       "timestamp": "2024-04-08T11:00:00+00:00",
       "actual": 1.0,
-      "predicted": 0.19
+      "predicted": 0.42
     },
     {
       "timestamp": "2024-04-08T12:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.22
+      "predicted": 0.43
     },
     {
       "timestamp": "2024-04-08T13:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.14
+      "predicted": 0.3
     },
     {
       "timestamp": "2024-04-08T14:00:00+00:00",
       "actual": 2.0,
-      "predicted": 0.1
+      "predicted": 0.3
     },
     {
       "timestamp": "2024-04-08T15:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.32
+      "predicted": 0.58
     },
     {
       "timestamp": "2024-04-08T16:00:00+00:00",
       "actual": 0.0,
-      "predicted": 0.11
+      "predicted": 0.33
     },
     {
       "timestamp": "2024-04-08T17:00:00+00:00",
       "actual": 1.0,
-      "predicted": 0.23
+      "predicted": 0.39
     }
   ],
   "forecast_24h": [
     {
       "hour_offset": 1,
-      "predicted_count": 0.2,
+      "predicted_count": 0.4,
       "surge_probability": 0.02,
       "is_peak": false
     },
     {
       "hour_offset": 2,
-      "predicted_count": 1.0,
+      "predicted_count": 1.1,
       "surge_probability": 0.05,
       "is_peak": false
     },
     {
       "hour_offset": 3,
-      "predicted_count": 2.3,
-      "surge_probability": 0.27,
+      "predicted_count": 1.8,
+      "surge_probability": 0.13,
       "is_peak": false
     },
     {
       "hour_offset": 4,
-      "predicted_count": 3.3,
-      "surge_probability": 0.62,
+      "predicted_count": 2.6,
+      "surge_probability": 0.36,
       "is_peak": false
     },
     {
       "hour_offset": 5,
-      "predicted_count": 3.0,
-      "surge_probability": 0.49,
+      "predicted_count": 2.5,
+      "surge_probability": 0.33,
       "is_peak": false
     },
     {
       "hour_offset": 6,
+      "predicted_count": 2.3,
+      "surge_probability": 0.25,
+      "is_peak": false
+    },
+    {
+      "hour_offset": 7,
+      "predicted_count": 2.3,
+      "surge_probability": 0.25,
+      "is_peak": false
+    },
+    {
+      "hour_offset": 8,
+      "predicted_count": 2.0,
+      "surge_probability": 0.19,
+      "is_peak": false
+    },
+    {
+      "hour_offset": 9,
+      "predicted_count": 2.0,
+      "surge_probability": 0.19,
+      "is_peak": false
+    },
+    {
+      "hour_offset": 10,
       "predicted_count": 2.0,
       "surge_probability": 0.18,
       "is_peak": false
     },
     {
-      "hour_offset": 7,
-      "predicted_count": 2.1,
-      "surge_probability": 0.2,
-      "is_peak": false
-    },
-    {
-      "hour_offset": 8,
-      "predicted_count": 1.3,
-      "surge_probability": 0.07,
-      "is_peak": false
-    },
-    {
-      "hour_offset": 9,
-      "predicted_count": 1.1,
-      "surge_probability": 0.05,
-      "is_peak": false
-    },
-    {
-      "hour_offset": 10,
-      "predicted_count": 1.1,
-      "surge_probability": 0.05,
-      "is_peak": false
-    },
-    {
       "hour_offset": 11,
-      "predicted_count": 0.9,
-      "surge_probability": 0.04,
+      "predicted_count": 1.9,
+      "surge_probability": 0.16,
       "is_peak": false
     },
     {
       "hour_offset": 12,
-      "predicted_count": 1.3,
-      "surge_probability": 0.07,
+      "predicted_count": 2.0,
+      "surge_probability": 0.17,
       "is_peak": false
     },
     {
       "hour_offset": 13,
-      "predicted_count": 1.0,
-      "surge_probability": 0.05,
+      "predicted_count": 1.5,
+      "surge_probability": 0.1,
       "is_peak": false
     },
     {
       "hour_offset": 14,
-      "predicted_count": 1.0,
-      "surge_probability": 0.05,
+      "predicted_count": 1.5,
+      "surge_probability": 0.09,
       "is_peak": false
     },
     {
       "hour_offset": 15,
-      "predicted_count": 1.1,
-      "surge_probability": 0.05,
+      "predicted_count": 1.5,
+      "surge_probability": 0.1,
       "is_peak": false
     },
     {
       "hour_offset": 16,
-      "predicted_count": 1.0,
-      "surge_probability": 0.05,
+      "predicted_count": 1.1,
+      "surge_probability": 0.06,
       "is_peak": false
     },
     {
       "hour_offset": 17,
-      "predicted_count": 0.4,
-      "surge_probability": 0.02,
+      "predicted_count": 0.7,
+      "surge_probability": 0.03,
       "is_peak": true
     },
     {
       "hour_offset": 18,
-      "predicted_count": 0.2,
+      "predicted_count": 0.5,
       "surge_probability": 0.02,
       "is_peak": true
     },
     {
       "hour_offset": 19,
-      "predicted_count": 0.2,
+      "predicted_count": 0.5,
       "surge_probability": 0.02,
       "is_peak": true
     },
     {
       "hour_offset": 20,
-      "predicted_count": 0.2,
+      "predicted_count": 0.5,
       "surge_probability": 0.02,
       "is_peak": true
     },
     {
       "hour_offset": 21,
-      "predicted_count": 0.1,
-      "surge_probability": 0.01,
+      "predicted_count": 0.3,
+      "surge_probability": 0.02,
       "is_peak": true
     },
     {
       "hour_offset": 22,
-      "predicted_count": 0.1,
-      "surge_probability": 0.01,
+      "predicted_count": 0.3,
+      "surge_probability": 0.02,
       "is_peak": false
     },
     {
       "hour_offset": 23,
-      "predicted_count": 0.1,
-      "surge_probability": 0.01,
+      "predicted_count": 0.3,
+      "surge_probability": 0.02,
       "is_peak": false
     },
     {
       "hour_offset": 24,
-      "predicted_count": 0.1,
-      "surge_probability": 0.01,
+      "predicted_count": 0.3,
+      "surge_probability": 0.02,
       "is_peak": false
     }
   ],
   "feature_importance": {
-    "lag_1h": 0.17064321041107178,
-    "lag_168h": 0.10252977162599564,
-    "rolling_168h_mean": 0.08673839271068573,
-    "lag_24h": 0.08294536918401718,
-    "rolling_3h_mean": 0.08270622044801712,
-    "is_peak_evening": 0.07681412994861603,
-    "day_of_week": 0.06431011110544205,
-    "is_overnight": 0.06148986145853996,
-    "hour_of_day": 0.05133366212248802,
-    "is_peak_morning": 0.05052975192666054,
-    "rolling_24h_std": 0.04466884210705757,
-    "rolling_24h_mean": 0.033685483038425446,
-    "month": 0.032117653638124466,
-    "day_cumulative": 0.03057757578790188,
-    "is_weekend": 0.028909990563988686
+    "lag_1h": 0.1888599693775177,
+    "lag_168h": 0.09326516091823578,
+    "rolling_3h_mean": 0.09273619949817657,
+    "rolling_168h_mean": 0.09248466044664383,
+    "lag_24h": 0.08368930220603943,
+    "is_peak_morning": 0.05993960052728653,
+    "is_weekend": 0.05352415144443512,
+    "is_peak_evening": 0.051994483917951584,
+    "rolling_24h_std": 0.05078861489892006,
+    "day_of_week": 0.048156630247831345,
+    "hour_of_day": 0.04644116386771202,
+    "rolling_24h_mean": 0.038422223180532455,
+    "is_overnight": 0.03732297569513321,
+    "day_cumulative": 0.032857105135917664,
+    "month": 0.029517775401473045
   },
   "extra": {
     "display_name": "XGBoost \u2014 Traffic Surge Probability",
-    "n_estimators": 80
+    "n_estimators": 44
   }
 }

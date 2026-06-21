@@ -19,6 +19,7 @@ Outputs (under ``$MODEL_DIR`` — default ``ml/models/``)::
 
 from __future__ import annotations
 
+import gzip
 import json
 import logging
 import os
@@ -237,8 +238,12 @@ def save_artifacts(
     features_path = MODEL_DIR / "feature_names.json"
     metrics_path = MODEL_DIR / "training_metrics.json"
 
+    # Save model in compressed gzip format (~10x smaller) for Streamlit/Cloud
+    with gzip.GzipFile(model_path.with_suffix(".pkl.gz"), "wb", compresslevel=9) as f:
+        joblib.dump(clf, f)
+    # Also keep uncompressed copy locally for backward compat
     joblib.dump(clf, model_path)
-    log.info("Model  → %s", model_path)
+    log.info("Model  → %s (+ .pkl.gz)", model_path)
 
     joblib.dump(le, encoder_path)
     log.info("Encoder → %s", encoder_path)
@@ -266,7 +271,19 @@ def _load_artifacts() -> None:
 
     log.info("Loading model artifacts from %s …", MODEL_DIR)
 
-    _model = joblib.load(MODEL_DIR / "event_classifier.pkl")
+    # Prefer compressed .pkl.gz if available (Streamlit / cloud deploys),
+    # fall back to uncompressed .pkl for local dev.
+    gz_path = MODEL_DIR / "event_classifier.pkl.gz"
+    raw_path = MODEL_DIR / "event_classifier.pkl"
+    if gz_path.is_file():
+        with gzip.GzipFile(gz_path, "rb") as f:
+            _model = joblib.load(f)
+    elif raw_path.is_file():
+        _model = joblib.load(raw_path)
+    else:
+        raise FileNotFoundError(
+            f"Model file not found. Expected {gz_path} or {raw_path}"
+        )
 
     _target_encoder = joblib.load(MODEL_DIR / "target_encoder.pkl")
 
