@@ -150,10 +150,10 @@ status:
 	@echo "  UrbanPulse AI — Model Artifact Status"
 	@echo "  ─────────────────────────────────────"
 	@for model in xgboost_surge lightgbm_officer prophet_xgb_seasonal hybrid_hotspot lstm_congestion; do \
-		if [ -d "$(MODEL_DIR)/$$model" ]; then \
-			echo "  ✅ $$model — trained"; \
+		if [ -f "$(MODEL_DIR)/$${model}_forecast.json" ]; then \
+			echo "  [OK] $$model — trained"; \
 		else \
-			echo "  ⬜ $$model — not trained"; \
+			echo "  [--] $$model — not trained"; \
 		fi; \
 	done
 	@echo ""

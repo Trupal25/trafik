@@ -20,6 +20,9 @@ import type {
   AllocateResourcesResponse,
   HotspotRecord,
   CopilotResponse,
+  ForecastListResponse,
+  ForecastDetailResponse,
+  RetrainResponse,
 } from "./types";
 
 const BASE_URL =
@@ -202,8 +205,20 @@ export const api = {
       "/copilot/conversations"
     ),
 
-  forecast: () =>
-    request<Record<string, unknown>>("/forecast"),
+  /* ------------------------------------------------------------------ */
+  /* Forecasting endpoints                                               */
+  /* ------------------------------------------------------------------ */
+
+  forecastList: () => request<ForecastListResponse>("/forecast"),
+
+  forecastModel: (model: string) =>
+    request<ForecastDetailResponse>(`/forecast/${model}`),
+
+  retrain: (model: string) =>
+    request<RetrainResponse>("/retrain", {
+      method: "POST",
+      body: JSON.stringify({ model }),
+    }),
 };
 
 export { BASE_URL };

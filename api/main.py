@@ -55,6 +55,40 @@ _state: dict[str, Any] = {
     "hotspots": None,
     "stats": None,
     "label_encoders": None,
+    "forecast_models": {},  # name → {metrics, forecast, trained_at, extra}
+}
+
+# Map of user-facing model names → internal model directory names
+FORECAST_MODEL_MAP: dict[str, str] = {
+    "xgboost": "xgboost_surge",
+    "lightgbm": "lightgbm_officer",
+    "prophet": "prophet_xgb_seasonal",
+    "hybrid": "hybrid_hotspot",
+    "lstm": "lstm_congestion",
+}
+
+# Map of internal names → display names + training commands
+FORECAST_MODEL_META: dict[str, dict[str, str]] = {
+    "xgboost_surge": {
+        "display": "XGBoost — Traffic Surge Probability",
+        "train_cmd": "python -m ml.train_xgboost",
+    },
+    "lightgbm_officer": {
+        "display": "LightGBM — Officer Demand Forecast",
+        "train_cmd": "python -m ml.train_lightgbm",
+    },
+    "prophet_xgb_seasonal": {
+        "display": "Prophet + XGBoost — Festival Traffic Risk",
+        "train_cmd": "python -m ml.train_prophet_xgb",
+    },
+    "hybrid_hotspot": {
+        "display": "Hybrid ML + Rules — Hotspot Prediction",
+        "train_cmd": "python -m ml.train_hybrid",
+    },
+    "lstm_congestion": {
+        "display": "LSTM — Congestion Index Sequence Forecast",
+        "train_cmd": "python -m ml.train_lstm",
+    },
 }
 
 
@@ -113,6 +147,33 @@ def _require_model() -> None:
         )
 
 
+def _load_forecast_models() -> None:
+    """Load all trained forecast model artifacts from ml/models/.
+
+    Each model writes a {name}_forecast.json and {name}_metrics.json.
+    We load whatever exists and surface them via /forecast.
+    """
+    loaded = 0
+    for internal_name, meta in FORECAST_MODEL_META.items():
+        forecast_path = _MODEL_DIR / f"{internal_name}_forecast.json"
+        if not forecast_path.is_file():
+            logger.info("Forecast model '%s' not trained yet — skipping.", internal_name)
+            continue
+        try:
+            data = _load_json_file(forecast_path)
+            data["display_name"] = meta["display"]
+            _state["forecast_models"][internal_name] = data
+            loaded += 1
+            logger.info("Loaded forecast model: %s", internal_name)
+        except Exception as exc:
+            logger.warning("Failed to load forecast model '%s': %s", internal_name, exc)
+
+    if loaded == 0:
+        logger.info("No forecast models trained yet. Run: make train-all")
+    else:
+        logger.info("Loaded %d forecast model(s).", loaded)
+
+
 # ---------------------------------------------------------------------------
 # Lifespan — startup / shutdown
 # ---------------------------------------------------------------------------
@@ -147,6 +208,9 @@ async def lifespan(app: FastAPI):  # noqa: ARG001
         )
     except FileNotFoundError:
         logger.warning("label_encoders.json not found — /label-encoders will return 404.")
+
+    # Load forecast model artifacts
+    _load_forecast_models()
 
     yield  # ← Application runs here
 
@@ -778,6 +842,171 @@ async def copilot_conversations() -> list[dict[str, Any]]:
     """Return metadata for recent in-memory conversations."""
     from ml.copilot import list_conversations
     return list_conversations()
+
+
+# ---- 14. GET /forecast -----------------------------------------------
+
+
+@app.get(
+    "/forecast",
+    summary="List all trained forecast models",
+    tags=["Forecasting"],
+)
+async def list_forecast_models() -> dict[str, Any]:
+    """Return metadata for every trained forecast model.
+
+    The response includes model names, display labels, training timestamps,
+    and evaluation metrics — but not the full forecast data. Use
+    ``GET /forecast/{model}`` for the detailed forecast of a specific model.
+    """
+    models = {}
+    for name, data in _state["forecast_models"].items():
+        models[name] = {
+            "display_name": data.get("display_name", name),
+            "trained_at": data.get("trained_at"),
+            "metrics": data.get("metrics", {}),
+            "has_forecast": bool(data.get("forecast_24h")),
+        }
+    return {
+        "models": models,
+        "total": len(models),
+        "available_names": list(FORECAST_MODEL_MAP.keys()),
+    }
+
+
+# ---- 15. GET /forecast/{model_name} ----------------------------------
+
+
+@app.get(
+    "/forecast/{model_name}",
+    summary="Get forecast data for a specific model",
+    tags=["Forecasting"],
+)
+async def get_forecast(model_name: str) -> dict[str, Any]:
+    """Serve the full forecast payload for a single model.
+
+    ``model_name`` is the user-facing short name: ``xgboost``, ``lightgbm``,
+    ``prophet``, ``hybrid``, or ``lstm``. Returns 404 if the model has not
+    been trained yet.
+    """
+    internal = FORECAST_MODEL_MAP.get(model_name)
+    if internal is None:
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                f"Unknown model '{model_name}'. "
+                f"Available: {', '.join(FORECAST_MODEL_MAP.keys())}"
+            ),
+        )
+
+    data = _state["forecast_models"].get(internal)
+    if data is None:
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                f"Model '{model_name}' has not been trained yet. "
+                f"Run: python -m ml.train_{model_name.replace('prophet', 'prophet_xgb')}"
+            ),
+        )
+    return data
+
+
+# ---- 16. POST /retrain -----------------------------------------------
+
+
+class RetrainRequest(BaseModel):
+    model: str = Field(
+        ...,
+        description=(
+            "Short model name to retrain: xgboost, lightgbm, prophet, "
+            "hybrid, lstm, or 'all' to retrain everything."
+        ),
+    )
+
+
+@app.post(
+    "/retrain",
+    summary="Manually retrain a forecast model",
+    tags=["Forecasting"],
+)
+async def retrain_model(request: RetrainRequest) -> dict[str, Any]:
+    """Trigger a synchronous retrain of the specified model.
+
+    Runs the training script as a subprocess, reloads the artifacts into
+    memory, and returns the updated metrics. This blocks for the duration
+    of training (typically 5-30 seconds for tree models, up to 2 minutes
+    for LSTM). Not recommended during high-traffic serving — use it during
+    maintenance windows.
+    """
+    import subprocess
+    import sys
+
+    model_key = request.model.strip().lower()
+
+    # Build the list of training commands
+    train_cmds: list[tuple[str, str]] = []
+    if model_key == "all":
+        for name, meta in FORECAST_MODEL_META.items():
+            train_cmds.append((meta["train_cmd"], name))
+    elif model_key in FORECAST_MODEL_MAP:
+        internal = FORECAST_MODEL_MAP[model_key]
+        meta = FORECAST_MODEL_META[internal]
+        train_cmds.append((meta["train_cmd"], internal))
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"Unknown model '{model_key}'. "
+                f"Available: {', '.join(FORECAST_MODEL_MAP.keys())}, all"
+            ),
+        )
+
+    results: list[dict[str, Any]] = []
+    for cmd, internal_name in train_cmds:
+        logger.info("Retraining %s: %s", internal_name, cmd)
+        try:
+            proc = subprocess.run(
+                cmd.split(),
+                capture_output=True,
+                text=True,
+                timeout=300,
+                cwd=str(_PROJECT_ROOT),
+            )
+            if proc.returncode != 0:
+                results.append({
+                    "model": internal_name,
+                    "status": "error",
+                    "error": proc.stderr[-500:] if proc.stderr else "No output",
+                })
+                logger.error("Retrain failed for %s: %s", internal_name, proc.stderr[-200:])
+                continue
+
+            # Reload the artifacts into memory
+            forecast_path = _MODEL_DIR / f"{internal_name}_forecast.json"
+            if forecast_path.is_file():
+                data = _load_json_file(forecast_path)
+                meta = FORECAST_MODEL_META.get(internal_name, {})
+                data["display_name"] = meta.get("display", internal_name)
+                _state["forecast_models"][internal_name] = data
+
+            results.append({
+                "model": internal_name,
+                "status": "ok",
+                "metrics": data.get("metrics", {}),
+            })
+            logger.info("Retrain OK: %s", internal_name)
+        except subprocess.TimeoutExpired:
+            results.append({"model": internal_name, "status": "timeout"})
+            logger.error("Retrain timed out for %s", internal_name)
+        except Exception as exc:
+            results.append({"model": internal_name, "status": "error", "error": str(exc)})
+            logger.exception("Retrain failed for %s", internal_name)
+
+    return {
+        "results": results,
+        "total": len(results),
+        "succeeded": sum(1 for r in results if r["status"] == "ok"),
+    }
 
 
 # ---- 7. GET /health -------------------------------------------------
