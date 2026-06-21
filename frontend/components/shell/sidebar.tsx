@@ -115,19 +115,14 @@ export function Sidebar() {
     >
       {/* Wordmark — Instrument Serif italic for the brand, mono tag below */}
       <div className="flex items-baseline gap-2.5 px-5 pt-6 pb-5">
-        <span className="live-dot mt-1.5 shrink-0" aria-hidden />
         <div className="flex flex-col leading-none">
           <span
-            className="text-[22px] leading-none tracking-tight text-foreground"
+            className="text-[30px] leading-none tracking-tight text-foreground"
             style={{ fontFamily: "var(--font-heading)", fontStyle: "italic" }}
           >
-            UrbanPulse
+            Trafik
           </span>
-          <span className="label-meta mt-1.5">
-            <span className="text-primary">AI</span>
-            <span className="mx-1.5 text-sidebar-border">/</span>
-            BLR Traffic
-          </span>
+          
         </div>
       </div>
 

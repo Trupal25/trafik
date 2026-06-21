@@ -176,13 +176,13 @@ export function SimulatorForm({ junctions, onSubmit, disabled }: SimulatorFormPr
           onClick={() => setRequiresClosure((v) => !v)}
           className={cn(
             "relative h-7 w-12 rounded-full transition-colors",
-            requiresClosure ? "bg-primary/80" : "bg-input"
+            requiresClosure ? "bg-input" : "bg-primary/80"
           )}
         >
           <span
             className={cn(
               "absolute top-0.5 size-6 rounded-full bg-foreground transition-transform",
-              requiresClosure ? "translate-x-[22px]" : "translate-x-0.5"
+              requiresClosure ? "-translate-x-[22px]" : "-translate-x-0.5"
             )}
           />
         </button>
