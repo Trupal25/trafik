@@ -227,11 +227,12 @@ export interface CopilotMessage {
 export interface CopilotCard {
   title: string;
   severity: Severity;
+  summary: string;
   metrics: { label: string; value: string }[];
   recommendations: string[];
   diversions?: { from: string; via: string; to: string }[];
   confidence: number;
-  sources: string[];
+  sources?: string[];
 }
 
 export interface CopilotResponse {
