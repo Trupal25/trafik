@@ -21,6 +21,8 @@ PYTHON   ?= python
 ML_DIR   := ml
 MODEL_DIR := ml/models
 EVENTS   := data/processed/events_clean.csv
+MPLCONFIGDIR ?= /tmp/astram-matplotlib
+export MPLCONFIGDIR
 
 # ──────────────────────────────────────────────
 # Phony targets
@@ -73,6 +75,7 @@ $(MODEL_DIR)/xgboost_surge:
 	@echo ""
 	@echo "  ── MODEL 1: XGBoost — Traffic Surge Probability ──"
 	@echo ""
+	@mkdir -p "$(MPLCONFIGDIR)"
 	$(PYTHON) -m ml.train_xgboost
 
 # MODEL 2: LightGBM — Officer Demand Forecast
@@ -83,6 +86,7 @@ $(MODEL_DIR)/lightgbm_officer:
 	@echo ""
 	@echo "  ── MODEL 2: LightGBM — Officer Demand Forecast ──"
 	@echo ""
+	@mkdir -p "$(MPLCONFIGDIR)"
 	$(PYTHON) -m ml.train_lightgbm
 
 # MODEL 3: Prophet + XGBoost — Festival/Seasonal Traffic Risk
@@ -93,6 +97,7 @@ $(MODEL_DIR)/prophet_xgb_seasonal:
 	@echo ""
 	@echo "  ── MODEL 3: Prophet + XGBoost — Festival/Seasonal Risk ──"
 	@echo ""
+	@mkdir -p "$(MPLCONFIGDIR)"
 	$(PYTHON) -m ml.train_prophet_xgb
 
 # MODEL 4: Hybrid ML + Rules — Hotspot Prediction
@@ -103,6 +108,7 @@ $(MODEL_DIR)/hybrid_hotspot:
 	@echo ""
 	@echo "  ── MODEL 4: Hybrid ML + Rules — Hotspot Prediction ──"
 	@echo ""
+	@mkdir -p "$(MPLCONFIGDIR)"
 	$(PYTHON) -m ml.train_hybrid
 
 # MODEL 5: LSTM — Congestion Index Sequence Forecast
@@ -113,6 +119,7 @@ $(MODEL_DIR)/lstm_congestion:
 	@echo ""
 	@echo "  ── MODEL 5: LSTM — Congestion Index Sequence Forecast ──"
 	@echo ""
+	@mkdir -p "$(MPLCONFIGDIR)"
 	$(PYTHON) -m ml.train_lstm
 
 # ──────────────────────────────────────────────

@@ -103,8 +103,8 @@ def train():
     train = featured.iloc[:split_idx]
     test = featured.iloc[split_idx:]
 
-    X_train, y_train = train[feature_cols].values, train[target_col].values
-    X_test, y_test = test[feature_cols].values, test[target_col].values
+    X_train, y_train = train[feature_cols], train[target_col].values
+    X_test, y_test = test[feature_cols], test[target_col].values
 
     model = lgb.LGBMRegressor(
         n_estimators=400,
@@ -138,7 +138,7 @@ def train():
 
     # 24h forecast
     forecast_24h = []
-    current = X_test[-1].copy().reshape(1, -1)
+    current = X_test.tail(1).copy()
     name_to_idx = {n: i for i, n in enumerate(feature_cols)}
     for h in range(1, 25):
         pred = float(np.clip(model.predict(current)[0], 0, None))
@@ -149,10 +149,10 @@ def train():
         })
         current = current.copy()
         if "lag_1h" in name_to_idx:
-            current[0, name_to_idx["lag_1h"]] = pred
+            current.loc[:, "lag_1h"] = pred
         if "hour_of_day" in name_to_idx:
-            new_hour = (int(current[0, name_to_idx["hour_of_day"]]) + 1) % 24
-            current[0, name_to_idx["hour_of_day"]] = new_hour
+            new_hour = (int(current["hour_of_day"].iloc[0]) + 1) % 24
+            current.loc[:, "hour_of_day"] = new_hour
 
     save_artifacts(
         model_name=MODEL_NAME,

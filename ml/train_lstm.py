@@ -47,9 +47,7 @@ def _build_sequences(values: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 
 
 def train():
-    """Train the LSTM and save artifacts."""
-    import tensorflow as tf
-    from tensorflow.keras import layers, models, callbacks
+    """Train the LSTM when TensorFlow exists, otherwise use an sklearn fallback."""
     from sklearn.preprocessing import MinMaxScaler
     from ml.forecast_base import (
         build_hourly_series,
@@ -57,6 +55,16 @@ def train():
         save_artifacts,
         print_summary,
     )
+
+    try:
+        from tensorflow.keras import layers, models, callbacks
+        has_tensorflow = True
+    except ModuleNotFoundError:
+        from sklearn.neural_network import MLPRegressor
+        has_tensorflow = False
+        logger.warning(
+            "TensorFlow is not installed; using sklearn MLP fallback for congestion forecasting."
+        )
 
     # Build hourly series and take the values
     series_df = build_hourly_series()
@@ -67,7 +75,6 @@ def train():
     raw_scaled = scaler.fit_transform(raw.reshape(-1, 1)).flatten()
 
     X, y = _build_sequences(raw_scaled)
-    X = X[..., np.newaxis]  # (samples, window, 1)
 
     # Chronological split
     split_idx = int(len(X) * 0.8)
@@ -79,42 +86,84 @@ def train():
         len(X_train), len(X_test), _WINDOW, _HORIZON,
     )
 
-    # Small model to avoid overfitting on ~2000 sequences
-    model = models.Sequential([
-        layers.Input(shape=(_WINDOW, 1)),
-        layers.LSTM(48, return_sequences=True, dropout=0.1),
-        layers.LSTM(24, dropout=0.1),
-        layers.Dense(_HORIZON),
-    ])
-    model.compile(optimizer="adam", loss="mse", metrics=["mae"])
+    if has_tensorflow:
+        X_train_model = X_train[..., np.newaxis]
+        X_test_model = X_test[..., np.newaxis]
 
-    early_stop = callbacks.EarlyStopping(
-        monitor="val_loss", patience=8, restore_best_weights=True, verbose=0
-    )
+        # Small model to avoid overfitting on ~2000 sequences
+        model = models.Sequential([
+            layers.Input(shape=(_WINDOW, 1)),
+            layers.LSTM(48, return_sequences=True, dropout=0.1),
+            layers.LSTM(24, dropout=0.1),
+            layers.Dense(_HORIZON),
+        ])
+        model.compile(optimizer="adam", loss="mse", metrics=["mae"])
 
-    history = model.fit(
-        X_train, y_train,
-        validation_data=(X_test, y_test),
-        epochs=60,
-        batch_size=32,
-        callbacks=[early_stop],
-        verbose=0,
-    )
+        early_stop = callbacks.EarlyStopping(
+            monitor="val_loss", patience=8, restore_best_weights=True, verbose=0
+        )
+
+        history = model.fit(
+            X_train_model, y_train,
+            validation_data=(X_test_model, y_test),
+            epochs=60,
+            batch_size=32,
+            callbacks=[early_stop],
+            verbose=0,
+        )
+        y_pred_scaled = model.predict(X_test_model, verbose=0)
+        epochs_trained = len(history.history["loss"])
+        final_val_loss = round(float(min(history.history["val_loss"])), 4)
+        architecture = "LSTM(48) → LSTM(24) → Dense(24)"
+        model_payload = {
+            "keras_model": model,
+            "scaler": scaler,
+            "window": _WINDOW,
+            "horizon": _HORIZON,
+            "backend": "tensorflow",
+        }
+    else:
+        model = MLPRegressor(
+            hidden_layer_sizes=(64, 32),
+            activation="relu",
+            solver="adam",
+            learning_rate_init=0.001,
+            max_iter=300,
+            early_stopping=True,
+            n_iter_no_change=12,
+            random_state=42,
+        )
+        model.fit(X_train, y_train)
+        y_pred_scaled = model.predict(X_test)
+        epochs_trained = int(model.n_iter_)
+        final_val_loss = round(float(model.best_validation_score_), 4)
+        architecture = "sklearn MLPRegressor(64, 32) fallback"
+        model_payload = {
+            "model": model,
+            "scaler": scaler,
+            "window": _WINDOW,
+            "horizon": _HORIZON,
+            "backend": "sklearn_mlp",
+        }
 
     # Evaluate: predict each test sequence's 24h, flatten, inverse-scale.
-    y_pred_scaled = model.predict(X_test, verbose=0)
     y_test_flat = scaler.inverse_transform(y_test.reshape(-1, 1)).flatten()
     y_pred_flat = scaler.inverse_transform(y_pred_scaled.reshape(-1, 1)).flatten()
     y_pred_flat = np.clip(y_pred_flat, 0, None)
 
     metrics = evaluate(y_test_flat, y_pred_flat)
     metrics["description"] = "24h-ahead hourly forecast from 168h input window"
-    metrics["epochs_trained"] = len(history.history["loss"])
-    metrics["final_val_loss"] = round(float(min(history.history["val_loss"])), 4)
+    metrics["epochs_trained"] = epochs_trained
+    metrics["final_val_loss"] = final_val_loss
+    metrics["backend"] = model_payload["backend"]
 
     # 24h forecast from the last available window
-    last_window = raw_scaled[-_WINDOW:].reshape(1, _WINDOW, 1)
-    next_24_scaled = model.predict(last_window, verbose=0).flatten()
+    if has_tensorflow:
+        last_window = raw_scaled[-_WINDOW:].reshape(1, _WINDOW, 1)
+        next_24_scaled = model.predict(last_window, verbose=0).flatten()
+    else:
+        last_window = raw_scaled[-_WINDOW:].reshape(1, _WINDOW)
+        next_24_scaled = model.predict(last_window).flatten()
     next_24 = scaler.inverse_transform(next_24_scaled.reshape(-1, 1)).flatten()
     next_24 = np.clip(next_24, 0, None)
 
@@ -130,14 +179,14 @@ def train():
 
     save_artifacts(
         model_name=MODEL_NAME,
-        model={"keras_model": model, "scaler": scaler, "window": _WINDOW, "horizon": _HORIZON},
+        model=model_payload,
         metrics=metrics,
         feature_names=["incident_count_lagged_168h"],
         test_index=pd.RangeIndex(len(y_test_flat)),
         y_test=y_test_flat,
         y_pred=y_pred_flat,
         forecast_24h=forecast_24h,
-        extra={"display_name": DISPLAY_NAME, "architecture": "LSTM(48) → LSTM(24) → Dense(24)"},
+        extra={"display_name": DISPLAY_NAME, "architecture": architecture},
     )
 
     print_summary(MODEL_NAME, DISPLAY_NAME, metrics, forecast_24h)

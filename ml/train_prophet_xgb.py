@@ -42,6 +42,9 @@ def _build_daily_series() -> pd.DataFrame:
 
 def train():
     """Fit Prophet on daily counts, then XGBoost on the residuals."""
+    logging.getLogger("prophet.plot").setLevel(logging.CRITICAL)
+    logging.getLogger("matplotlib.font_manager").setLevel(logging.WARNING)
+
     from prophet import Prophet
     import xgboost as xgb
     from sklearn.metrics import mean_absolute_error, mean_squared_error

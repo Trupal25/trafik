@@ -265,10 +265,19 @@ def print_summary(model_name: str, display_name: str, metrics: dict, forecast_24
         print(f"\n  Description: {metrics['description']}")
     print()
     if forecast_24h:
-        print("  24-Hour Forecast (next day):")
-        for h in forecast_24h[:12]:
-            bar = "█" * int(h["predicted_count"] * 3)
-            print(f"    +{h['hour_offset']:2d}h  {h['predicted_count']:5.1f}  {bar}")
-        if len(forecast_24h) > 12:
-            print(f"    ... +{forecast_24h[-1]['hour_offset']}h  (see forecast JSON)")
+        if "hour_offset" in forecast_24h[0]:
+            print("  24-Hour Forecast (next day):")
+            for h in forecast_24h[:12]:
+                bar = "█" * int(h["predicted_count"] * 3)
+                print(f"    +{h['hour_offset']:2d}h  {h['predicted_count']:5.1f}  {bar}")
+            if len(forecast_24h) > 12:
+                print(f"    ... +{forecast_24h[-1]['hour_offset']}h  (see forecast JSON)")
+        elif "date" in forecast_24h[0]:
+            print("  Daily Forecast:")
+            for day in forecast_24h:
+                bar = "█" * min(60, int(day["predicted_count"] / 5))
+                label = f"{day.get('day', '')} {day['date']}".strip()
+                print(f"    {label:<14s} {day['predicted_count']:6.1f}  {bar}")
+        else:
+            print("  Forecast saved to JSON.")
     print("=" * 64 + "\n")

@@ -34,6 +34,27 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 _MODEL_DIR = _PROJECT_ROOT / "ml" / "models"
 
 
+def _select_named_junction_window(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Timestamp, int]:
+    """Return the most recent usable junction-labelled training window.
+
+    Some exported datasets have valid incident coordinates after junction
+    labels stop being populated. Model 4 is junction-level by design, so using
+    the global newest timestamp can make the latest 30-day slice empty. Anchor
+    the training window to the newest nonzero junction label instead.
+    """
+    named = df[df["junction"].notna() & (df["junction"] != 0)].copy()
+    if named.empty:
+        return named, df["start_dt"].max(), 0
+
+    named_now = named["start_dt"].max()
+    for days in (30, 60, 90, 120, 180, 365):
+        window = named[named["start_dt"] >= named_now - pd.Timedelta(days=days)]
+        if (window.groupby("junction").size() >= 2).sum() > 0:
+            return window, named_now, days
+
+    return named, named_now, 0
+
+
 def train():
     """Compute junction-level risk scores and predict future hotspots."""
     from ml.forecast_base import save_artifacts, print_summary
@@ -41,12 +62,22 @@ def train():
     from ml.analytics import _events_df, _junction_name
 
     df = _events_df()
-    now = df["start_dt"].max()
-    last_30 = df[df["start_dt"] >= now - pd.Timedelta(days=30)]
-    last_7 = df[df["start_dt"] >= now - pd.Timedelta(days=7)]
-    prev_7 = df[(df["start_dt"] >= now - pd.Timedelta(days=14)) & (df["start_dt"] < now - pd.Timedelta(days=7))]
+    data_as_of = df["start_dt"].max()
+    named, now, window_days = _select_named_junction_window(df)
+    last_7 = named[named["start_dt"] >= now - pd.Timedelta(days=7)]
+    prev_7 = named[
+        (named["start_dt"] >= now - pd.Timedelta(days=14))
+        & (named["start_dt"] < now - pd.Timedelta(days=7))
+    ]
 
-    named = last_30[last_30["junction"].notna() & (last_30["junction"] != 0)]
+    if named.empty:
+        logger.warning("No nonzero junction-labelled events found; hotspot predictions will be empty.")
+    elif now < data_as_of:
+        logger.warning(
+            "Latest junction-labelled event is %s, while dataset ends at %s; "
+            "training Model 4 from the latest labelled %s-day window.",
+            now.isoformat(), data_as_of.isoformat(), window_days or "available",
+        )
 
     predictions: list[dict] = []
     for junc_code, group in named.groupby("junction"):
@@ -122,6 +153,9 @@ def train():
         "critical": sum(1 for p in predictions if p["severity"] == "critical"),
         "high": sum(1 for p in predictions if p["severity"] == "high"),
         "test_samples": int(len(predictions)),
+        "training_window_days": int(window_days),
+        "junction_data_as_of": now.isoformat(),
+        "dataset_data_as_of": data_as_of.isoformat(),
     }
 
     forecast_24h = [
