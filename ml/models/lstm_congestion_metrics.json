@@ -1,0 +1,16 @@
+{
+  "mae": 1.927,
+  "rmse": 3.638,
+  "r2": 0.155,
+  "surge_threshold": 3,
+  "surge_precision": 0.664,
+  "surge_recall": 0.641,
+  "surge_f1": 0.653,
+  "surge_accuracy": 0.737,
+  "test_samples": 16488,
+  "surge_rate": 0.386,
+  "description": "24h-ahead hourly forecast from 168h input window",
+  "epochs_trained": 191,
+  "final_val_loss": 0.2154,
+  "backend": "sklearn_mlp"
+}

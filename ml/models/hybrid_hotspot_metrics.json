@@ -1,0 +1,11 @@
+{
+  "persistence_accuracy": 0.053,
+  "description": "Junction-level hotspot risk ranking (RF causes + impact scores + trend rules)",
+  "total_junctions_scored": 155,
+  "critical": 79,
+  "high": 76,
+  "test_samples": 155,
+  "training_window_days": 30,
+  "junction_data_as_of": "2024-01-30T05:21:06.975000+00:00",
+  "dataset_data_as_of": "2024-04-08T17:11:42.780000+00:00"
+}

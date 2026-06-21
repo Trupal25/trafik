@@ -1,0 +1,509 @@
+{
+  "model_name": "lstm_congestion",
+  "trained_at": "2026-06-21T12:58:37.238641+00:00",
+  "metrics": {
+    "mae": 1.927,
+    "rmse": 3.638,
+    "r2": 0.155,
+    "surge_threshold": 3,
+    "surge_precision": 0.664,
+    "surge_recall": 0.641,
+    "surge_f1": 0.653,
+    "surge_accuracy": 0.737,
+    "test_samples": 16488,
+    "surge_rate": 0.386,
+    "description": "24h-ahead hourly forecast from 168h input window",
+    "epochs_trained": 191,
+    "final_val_loss": 0.2154,
+    "backend": "sklearn_mlp"
+  },
+  "test_predictions": [
+    {
+      "timestamp": "16416",
+      "actual": 0.0,
+      "predicted": 0.5
+    },
+    {
+      "timestamp": "16417",
+      "actual": 0.0,
+      "predicted": 1.7
+    },
+    {
+      "timestamp": "16418",
+      "actual": 0.0,
+      "predicted": 2.26
+    },
+    {
+      "timestamp": "16419",
+      "actual": 2.0,
+      "predicted": 2.81
+    },
+    {
+      "timestamp": "16420",
+      "actual": 2.0,
+      "predicted": 2.45
+    },
+    {
+      "timestamp": "16421",
+      "actual": 5.0,
+      "predicted": 3.96
+    },
+    {
+      "timestamp": "16422",
+      "actual": 2.0,
+      "predicted": 0.45
+    },
+    {
+      "timestamp": "16423",
+      "actual": 4.0,
+      "predicted": 0.01
+    },
+    {
+      "timestamp": "16424",
+      "actual": 2.0,
+      "predicted": 0.35
+    },
+    {
+      "timestamp": "16425",
+      "actual": 1.0,
+      "predicted": 0.66
+    },
+    {
+      "timestamp": "16426",
+      "actual": 2.0,
+      "predicted": 3.68
+    },
+    {
+      "timestamp": "16427",
+      "actual": 3.0,
+      "predicted": 1.93
+    },
+    {
+      "timestamp": "16428",
+      "actual": 2.0,
+      "predicted": 1.28
+    },
+    {
+      "timestamp": "16429",
+      "actual": 0.0,
+      "predicted": 2.62
+    },
+    {
+      "timestamp": "16430",
+      "actual": 1.0,
+      "predicted": 3.91
+    },
+    {
+      "timestamp": "16431",
+      "actual": 0.0,
+      "predicted": 5.6
+    },
+    {
+      "timestamp": "16432",
+      "actual": 2.0,
+      "predicted": 9.4
+    },
+    {
+      "timestamp": "16433",
+      "actual": 0.0,
+      "predicted": 7.01
+    },
+    {
+      "timestamp": "16434",
+      "actual": 1.0,
+      "predicted": 4.23
+    },
+    {
+      "timestamp": "16435",
+      "actual": 0.0,
+      "predicted": 2.68
+    },
+    {
+      "timestamp": "16436",
+      "actual": 1.0,
+      "predicted": 0.19
+    },
+    {
+      "timestamp": "16437",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16438",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16439",
+      "actual": 2.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16440",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16441",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16442",
+      "actual": 2.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16443",
+      "actual": 2.0,
+      "predicted": 0.02
+    },
+    {
+      "timestamp": "16444",
+      "actual": 5.0,
+      "predicted": 1.85
+    },
+    {
+      "timestamp": "16445",
+      "actual": 2.0,
+      "predicted": 4.93
+    },
+    {
+      "timestamp": "16446",
+      "actual": 4.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16447",
+      "actual": 2.0,
+      "predicted": 0.02
+    },
+    {
+      "timestamp": "16448",
+      "actual": 1.0,
+      "predicted": 2.01
+    },
+    {
+      "timestamp": "16449",
+      "actual": 2.0,
+      "predicted": 0.71
+    },
+    {
+      "timestamp": "16450",
+      "actual": 3.0,
+      "predicted": 5.02
+    },
+    {
+      "timestamp": "16451",
+      "actual": 2.0,
+      "predicted": 3.04
+    },
+    {
+      "timestamp": "16452",
+      "actual": 0.0,
+      "predicted": 3.52
+    },
+    {
+      "timestamp": "16453",
+      "actual": 1.0,
+      "predicted": 5.12
+    },
+    {
+      "timestamp": "16454",
+      "actual": 0.0,
+      "predicted": 6.03
+    },
+    {
+      "timestamp": "16455",
+      "actual": 2.0,
+      "predicted": 7.73
+    },
+    {
+      "timestamp": "16456",
+      "actual": 0.0,
+      "predicted": 9.13
+    },
+    {
+      "timestamp": "16457",
+      "actual": 1.0,
+      "predicted": 4.2
+    },
+    {
+      "timestamp": "16458",
+      "actual": 0.0,
+      "predicted": 1.98
+    },
+    {
+      "timestamp": "16459",
+      "actual": 1.0,
+      "predicted": 0.86
+    },
+    {
+      "timestamp": "16460",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16461",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16462",
+      "actual": 2.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16463",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16464",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16465",
+      "actual": 2.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16466",
+      "actual": 2.0,
+      "predicted": 1.67
+    },
+    {
+      "timestamp": "16467",
+      "actual": 5.0,
+      "predicted": 1.85
+    },
+    {
+      "timestamp": "16468",
+      "actual": 2.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16469",
+      "actual": 4.0,
+      "predicted": 3.59
+    },
+    {
+      "timestamp": "16470",
+      "actual": 2.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16471",
+      "actual": 1.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16472",
+      "actual": 2.0,
+      "predicted": 0.48
+    },
+    {
+      "timestamp": "16473",
+      "actual": 3.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16474",
+      "actual": 2.0,
+      "predicted": 3.78
+    },
+    {
+      "timestamp": "16475",
+      "actual": 0.0,
+      "predicted": 1.6
+    },
+    {
+      "timestamp": "16476",
+      "actual": 1.0,
+      "predicted": 3.39
+    },
+    {
+      "timestamp": "16477",
+      "actual": 0.0,
+      "predicted": 4.04
+    },
+    {
+      "timestamp": "16478",
+      "actual": 2.0,
+      "predicted": 3.35
+    },
+    {
+      "timestamp": "16479",
+      "actual": 0.0,
+      "predicted": 3.16
+    },
+    {
+      "timestamp": "16480",
+      "actual": 1.0,
+      "predicted": 3.32
+    },
+    {
+      "timestamp": "16481",
+      "actual": 0.0,
+      "predicted": 0.17
+    },
+    {
+      "timestamp": "16482",
+      "actual": 1.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16483",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16484",
+      "actual": 0.0,
+      "predicted": 0.0
+    },
+    {
+      "timestamp": "16485",
+      "actual": 2.0,
+      "predicted": 0.08
+    },
+    {
+      "timestamp": "16486",
+      "actual": 0.0,
+      "predicted": 1.08
+    },
+    {
+      "timestamp": "16487",
+      "actual": 0.0,
+      "predicted": 0.66
+    }
+  ],
+  "forecast_24h": [
+    {
+      "hour_offset": 1,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 2,
+      "predicted_count": 1.8,
+      "surge_probability": 0.14
+    },
+    {
+      "hour_offset": 3,
+      "predicted_count": 3.3,
+      "surge_probability": 0.6
+    },
+    {
+      "hour_offset": 4,
+      "predicted_count": 4.7,
+      "surge_probability": 0.93
+    },
+    {
+      "hour_offset": 5,
+      "predicted_count": 1.6,
+      "surge_probability": 0.12
+    },
+    {
+      "hour_offset": 6,
+      "predicted_count": 1.7,
+      "surge_probability": 0.12
+    },
+    {
+      "hour_offset": 7,
+      "predicted_count": 3.8,
+      "surge_probability": 0.77
+    },
+    {
+      "hour_offset": 8,
+      "predicted_count": 2.2,
+      "surge_probability": 0.24
+    },
+    {
+      "hour_offset": 9,
+      "predicted_count": 3.0,
+      "surge_probability": 0.5
+    },
+    {
+      "hour_offset": 10,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 11,
+      "predicted_count": 3.5,
+      "surge_probability": 0.69
+    },
+    {
+      "hour_offset": 12,
+      "predicted_count": 4.5,
+      "surge_probability": 0.9
+    },
+    {
+      "hour_offset": 13,
+      "predicted_count": 7.6,
+      "surge_probability": 1.0
+    },
+    {
+      "hour_offset": 14,
+      "predicted_count": 3.2,
+      "surge_probability": 0.56
+    },
+    {
+      "hour_offset": 15,
+      "predicted_count": 0.9,
+      "surge_probability": 0.04
+    },
+    {
+      "hour_offset": 16,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 17,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 18,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 19,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 20,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 21,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 22,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 23,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    },
+    {
+      "hour_offset": 24,
+      "predicted_count": 0.0,
+      "surge_probability": 0.01
+    }
+  ],
+  "feature_importance": {},
+  "extra": {
+    "display_name": "LSTM \u2014 Congestion Index Sequence Forecast",
+    "architecture": "sklearn MLPRegressor(64, 32) fallback"
+  }
+}

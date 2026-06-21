@@ -1,0 +1,13 @@
+{
+  "mae": 10.059,
+  "rmse": 23.453,
+  "r2": 0.318,
+  "surge_threshold": 15,
+  "surge_precision": 0.815,
+  "surge_recall": 0.942,
+  "surge_f1": 0.874,
+  "surge_accuracy": 0.824,
+  "test_samples": 663,
+  "surge_rate": 0.649,
+  "description": "Officer demand per hour (incident_count \u00d7 resource allocation)"
+}

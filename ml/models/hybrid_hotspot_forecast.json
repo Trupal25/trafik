@@ -1,0 +1,380 @@
+{
+  "model_name": "hybrid_hotspot",
+  "trained_at": "2026-06-21T12:58:21.687555+00:00",
+  "metrics": {
+    "persistence_accuracy": 0.053,
+    "description": "Junction-level hotspot risk ranking (RF causes + impact scores + trend rules)",
+    "total_junctions_scored": 155,
+    "critical": 79,
+    "high": 76,
+    "test_samples": 155,
+    "training_window_days": 30,
+    "junction_data_as_of": "2024-01-30T05:21:06.975000+00:00",
+    "dataset_data_as_of": "2024-04-08T17:11:42.780000+00:00"
+  },
+  "test_predictions": [
+    {
+      "timestamp": "K R Circle",
+      "actual": 36.91,
+      "predicted": 36.91
+    },
+    {
+      "timestamp": "YelhankaCircle",
+      "actual": 36.88,
+      "predicted": 36.88
+    },
+    {
+      "timestamp": "MekhriCircle",
+      "actual": 30.31,
+      "predicted": 30.31
+    },
+    {
+      "timestamp": "CMP GateJunc",
+      "actual": 30.25,
+      "predicted": 30.25
+    },
+    {
+      "timestamp": "KIMCO Junction",
+      "actual": 28.92,
+      "predicted": 28.92
+    },
+    {
+      "timestamp": "ShantalaJunction",
+      "actual": 28.05,
+      "predicted": 28.05
+    },
+    {
+      "timestamp": "Bommanahalli",
+      "actual": 25.6,
+      "predicted": 25.6
+    },
+    {
+      "timestamp": "SantheCircle",
+      "actual": 24.85,
+      "predicted": 24.85
+    },
+    {
+      "timestamp": "SilkBoardJunc",
+      "actual": 24.2,
+      "predicted": 24.2
+    },
+    {
+      "timestamp": "Nagavara-ORR Junction",
+      "actual": 23.5,
+      "predicted": 23.5
+    },
+    {
+      "timestamp": "Sumanhalli",
+      "actual": 23.49,
+      "predicted": 23.49
+    },
+    {
+      "timestamp": "VeerannapalyaJunction(BEL,HO)",
+      "actual": 23.3,
+      "predicted": 23.3
+    },
+    {
+      "timestamp": "YeshwanthpuraCircle",
+      "actual": 23.08,
+      "predicted": 23.08
+    },
+    {
+      "timestamp": "MargosaRd-18thCrossJunc",
+      "actual": 23.0,
+      "predicted": 23.0
+    },
+    {
+      "timestamp": "YelhankaBypass",
+      "actual": 21.48,
+      "predicted": 21.48
+    },
+    {
+      "timestamp": "JakkurCrossJunction",
+      "actual": 21.2,
+      "predicted": 21.2
+    },
+    {
+      "timestamp": "HoramavuJunction",
+      "actual": 21.18,
+      "predicted": 21.18
+    },
+    {
+      "timestamp": "KarnatakaBhavanJunction",
+      "actual": 21.05,
+      "predicted": 21.05
+    },
+    {
+      "timestamp": "IndianExpressJunction",
+      "actual": 20.45,
+      "predicted": 20.45
+    },
+    {
+      "timestamp": "KoramangalaWaterTankJunc",
+      "actual": 20.0,
+      "predicted": 20.0
+    }
+  ],
+  "forecast_24h": [
+    {
+      "hour_offset": 0,
+      "predicted_count": 36.91,
+      "junction": "K R Circle",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 36.88,
+      "junction": "YelhankaCircle",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 30.31,
+      "junction": "MekhriCircle",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 30.25,
+      "junction": "CMP GateJunc",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 28.92,
+      "junction": "KIMCO Junction",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 28.05,
+      "junction": "ShantalaJunction",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 25.6,
+      "junction": "Bommanahalli",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 24.85,
+      "junction": "SantheCircle",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 24.2,
+      "junction": "SilkBoardJunc",
+      "severity": "critical"
+    },
+    {
+      "hour_offset": 0,
+      "predicted_count": 23.5,
+      "junction": "Nagavara-ORR Junction",
+      "severity": "critical"
+    }
+  ],
+  "feature_importance": {},
+  "extra": {
+    "display_name": "Hybrid ML + Rules \u2014 Hotspot Prediction",
+    "top_predictions": [
+      {
+        "junction": "K R Circle",
+        "junction_code": 129,
+        "lat": 12.977078153846154,
+        "lng": 77.58552154615384,
+        "risk_score": 36.91,
+        "severity": "critical",
+        "incidents_30d": 13,
+        "incidents_7d": 7,
+        "trend_factor": 2.0,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 42.7
+      },
+      {
+        "junction": "YelhankaCircle",
+        "junction_code": 291,
+        "lat": 13.093889494999999,
+        "lng": 77.59641029000001,
+        "risk_score": 36.88,
+        "severity": "critical",
+        "incidents_30d": 20,
+        "incidents_7d": 6,
+        "trend_factor": 2.0,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 42.2
+      },
+      {
+        "junction": "MekhriCircle",
+        "junction_code": 176,
+        "lat": 13.015502347058824,
+        "lng": 77.58388499411765,
+        "risk_score": 30.31,
+        "severity": "critical",
+        "incidents_30d": 17,
+        "incidents_7d": 5,
+        "trend_factor": 1.5,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 40.9
+      },
+      {
+        "junction": "CMP GateJunc",
+        "junction_code": 56,
+        "lat": 12.95779952,
+        "lng": 77.60596629000001,
+        "risk_score": 30.25,
+        "severity": "critical",
+        "incidents_30d": 10,
+        "incidents_7d": 5,
+        "trend_factor": 2.0,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 42.5
+      },
+      {
+        "junction": "KIMCO Junction",
+        "junction_code": 133,
+        "lat": 12.950898558333334,
+        "lng": 77.53768040833334,
+        "risk_score": 28.92,
+        "severity": "critical",
+        "incidents_30d": 12,
+        "incidents_7d": 5,
+        "trend_factor": 1.5,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 42.9
+      },
+      {
+        "junction": "ShantalaJunction",
+        "junction_code": 244,
+        "lat": 12.974859623333336,
+        "lng": 77.57032078333334,
+        "risk_score": 28.05,
+        "severity": "critical",
+        "incidents_30d": 6,
+        "incidents_7d": 4,
+        "trend_factor": 0.5,
+        "dominant_cause": "accident",
+        "weighted_impact": 67.5
+      },
+      {
+        "junction": "Bommanahalli",
+        "junction_code": 50,
+        "lat": 12.90771092857143,
+        "lng": 77.62823752857142,
+        "risk_score": 25.6,
+        "severity": "critical",
+        "incidents_30d": 7,
+        "incidents_7d": 4,
+        "trend_factor": 2.0,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 40.0
+      },
+      {
+        "junction": "SantheCircle",
+        "junction_code": 240,
+        "lat": 13.097122070000001,
+        "lng": 77.59869056,
+        "risk_score": 24.85,
+        "severity": "critical",
+        "incidents_30d": 10,
+        "incidents_7d": 4,
+        "trend_factor": 0.5,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 51.5
+      },
+      {
+        "junction": "SilkBoardJunc",
+        "junction_code": 252,
+        "lat": 12.916069679999998,
+        "lng": 77.62351346,
+        "risk_score": 24.2,
+        "severity": "critical",
+        "incidents_30d": 5,
+        "incidents_7d": 3,
+        "trend_factor": 2.0,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 47.0
+      },
+      {
+        "junction": "Nagavara-ORR Junction",
+        "junction_code": 194,
+        "lat": 13.040179583333332,
+        "lng": 77.62298643333334,
+        "risk_score": 23.5,
+        "severity": "critical",
+        "incidents_30d": 6,
+        "incidents_7d": 3,
+        "trend_factor": 2.0,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 43.3
+      },
+      {
+        "junction": "Sumanhalli",
+        "junction_code": 262,
+        "lat": 12.98709405,
+        "lng": 77.5199218625,
+        "risk_score": 23.49,
+        "severity": "critical",
+        "incidents_30d": 8,
+        "incidents_7d": 3,
+        "trend_factor": 2.0,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 40.6
+      },
+      {
+        "junction": "VeerannapalyaJunction(BEL,HO)",
+        "junction_code": 280,
+        "lat": 13.041422808333332,
+        "lng": 77.61412636666667,
+        "risk_score": 23.3,
+        "severity": "critical",
+        "incidents_30d": 12,
+        "incidents_7d": 0,
+        "trend_factor": 0.5,
+        "dominant_cause": "construction",
+        "weighted_impact": 61.7
+      },
+      {
+        "junction": "YeshwanthpuraCircle",
+        "junction_code": 293,
+        "lat": 13.017724185294117,
+        "lng": 77.55706075588236,
+        "risk_score": 23.08,
+        "severity": "critical",
+        "incidents_30d": 17,
+        "incidents_7d": 6,
+        "trend_factor": -0.14,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 38.8
+      },
+      {
+        "junction": "MargosaRd-18thCrossJunc",
+        "junction_code": 172,
+        "lat": 13.011573159999998,
+        "lng": 77.56937066,
+        "risk_score": 23.0,
+        "severity": "critical",
+        "incidents_30d": 5,
+        "incidents_7d": 3,
+        "trend_factor": 2.0,
+        "dominant_cause": "road_conditions",
+        "weighted_impact": 43.0
+      },
+      {
+        "junction": "YelhankaBypass",
+        "junction_code": 290,
+        "lat": 13.081891855555556,
+        "lng": 77.59328425555555,
+        "risk_score": 21.48,
+        "severity": "critical",
+        "incidents_30d": 9,
+        "incidents_7d": 3,
+        "trend_factor": 0.5,
+        "dominant_cause": "vehicle_breakdown",
+        "weighted_impact": 46.1
+      }
+    ]
+  }
+}
