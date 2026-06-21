@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import uuid
 from typing import Any
 
@@ -29,8 +30,9 @@ logger = logging.getLogger(__name__)
 _PROJECT_ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
 _config = dotenv_values(_PROJECT_ROOT / ".env")
 
-_API_KEY: str | None = _config.get("GROQ_API_KEY") or None
-_MODEL: str = _config.get("GROQ_MODEL") or "llama-3.3-70b-versatile"
+# Prefer environment variables (Docker / HF Spaces secrets), fall back to .env
+_API_KEY: str | None = os.environ.get("GROQ_API_KEY") or _config.get("GROQ_API_KEY") or None
+_MODEL: str = os.environ.get("GROQ_MODEL") or _config.get("GROQ_MODEL") or "llama-3.3-70b-versatile"
 
 _client: Groq | None = None
 _conversations: dict[str, list[dict[str, Any]]] = {}
