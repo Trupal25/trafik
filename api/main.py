@@ -280,6 +280,15 @@ class ResourcePlanRequest(BaseModel):
     )
 
 
+class CopilotRequest(BaseModel):
+    """Input for the AI Copilot (natural-language traffic Q&A)."""
+
+    conversation_id: Optional[str] = Field(
+        None, description="Existing conversation ID. Omit to start a new one."
+    )
+    message: str = Field(..., min_length=1, description="User's question")
+
+
 # ---- Response models -----------------------------------------------
 
 
@@ -714,6 +723,61 @@ async def resource_plan(request: ResourcePlanRequest) -> dict[str, Any]:
         raise HTTPException(
             status_code=500, detail=f"Resource plan failed: {exc}"
         ) from exc
+
+
+# ---- 12. POST /copilot ---------------------------------------------
+
+
+@app.post(
+    "/copilot",
+    summary="AI Copilot — natural-language traffic Q&A (Groq + Llama 3)",
+    tags=["Copilot"],
+)
+async def copilot(request: CopilotRequest) -> dict[str, Any]:
+    """Conversational AI assistant grounded in the live traffic dataset via
+    tool-calling. Returns plain text for simple queries or a structured
+    intelligence card for complex scenario questions.
+
+    Requires ``GROQ_API_KEY`` in the project-root ``.env``. Returns 503
+    with a clear message if the key is missing.
+    """
+    try:
+        from ml.copilot import run_copilot, is_available
+
+        if not is_available():
+            raise HTTPException(
+                status_code=503,
+                detail=(
+                    "GROQ_API_KEY is not set on the backend. Add it to the "
+                    "project-root .env file (see .env.example). Free keys at "
+                    "https://console.groq.com/keys."
+                ),
+            )
+        result = run_copilot(request.message, request.conversation_id)
+        return result
+    except HTTPException:
+        raise
+    except RuntimeError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("Copilot failed.")
+        raise HTTPException(
+            status_code=500, detail=f"Copilot failed: {exc}"
+        ) from exc
+
+
+# ---- 13. GET /copilot/conversations --------------------------------
+
+
+@app.get(
+    "/copilot/conversations",
+    summary="List recent Copilot conversations (for the sidebar)",
+    tags=["Copilot"],
+)
+async def copilot_conversations() -> list[dict[str, Any]]:
+    """Return metadata for recent in-memory conversations."""
+    from ml.copilot import list_conversations
+    return list_conversations()
 
 
 # ---- 7. GET /health -------------------------------------------------

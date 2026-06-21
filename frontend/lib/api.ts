@@ -197,6 +197,11 @@ export const api = {
       body: JSON.stringify(body),
     }),
 
+  copilotConversations: () =>
+    request<Array<{ id: string; title: string; message_count: number }>>(
+      "/copilot/conversations"
+    ),
+
   forecast: () =>
     request<Record<string, unknown>>("/forecast"),
 };
