@@ -67,7 +67,7 @@ switch ($action) {
         Write-Host "`n  UrbanPulse AI -- Model Status" -ForegroundColor Cyan
         Write-Host "  -----------------------------" -ForegroundColor Cyan
         @("xgboost_surge", "lightgbm_officer", "prophet_xgb_seasonal", "hybrid_hotspot", "lstm_congestion") | ForEach-Object {
-            if (Test-Path "ml\models\$_") { Write-Host "  [OK] $_" -ForegroundColor Green }
+            if (Test-Path "ml\models\${_}_forecast.json") { Write-Host "  [OK] $_" -ForegroundColor Green }
             else { Write-Host "  [--] $_ (not trained)" -ForegroundColor DarkGray }
         }
         Write-Host ""

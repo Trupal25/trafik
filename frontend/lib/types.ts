@@ -241,3 +241,55 @@ export interface CopilotResponse {
   model: string;
   usage?: { prompt_tokens: number; completion_tokens: number };
 }
+
+/* ---------- Forecasting ---------- */
+
+export interface ForecastTestPoint {
+  timestamp: string;
+  actual: number;
+  predicted: number;
+}
+
+export interface ForecastHourlyPoint {
+  hour_offset: number;
+  predicted_count: number;
+  surge_probability: number;
+  is_peak?: boolean;
+  junction?: string;
+  severity?: string;
+}
+
+export interface ForecastModelMeta {
+  display_name: string;
+  trained_at: string | null;
+  metrics: Record<string, unknown>;
+  has_forecast: boolean;
+}
+
+export interface ForecastListResponse {
+  models: Record<string, ForecastModelMeta>;
+  total: number;
+  available_names: string[];
+}
+
+export interface ForecastDetailResponse {
+  model_name: string;
+  trained_at: string;
+  display_name?: string;
+  metrics: Record<string, unknown>;
+  test_predictions: ForecastTestPoint[];
+  forecast_24h: ForecastHourlyPoint[];
+  feature_importance: Record<string, number>;
+  extra: Record<string, unknown>;
+}
+
+export interface RetrainResponse {
+  results: {
+    model: string;
+    status: "ok" | "error" | "timeout";
+    metrics?: Record<string, unknown>;
+    error?: string;
+  }[];
+  total: number;
+  succeeded: number;
+}
