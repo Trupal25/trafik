@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from dotenv import dotenv_values
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
@@ -253,6 +253,30 @@ class SimulateEventRequest(BaseModel):
         description=(
             "Cause of the event. If null/empty, the ML model predicts it."
         ),
+    )
+
+
+class ResourcePlanRequest(BaseModel):
+    """Input for the AI deployment planner (resource-plan endpoint)."""
+
+    label: Optional[str] = Field(
+        None, description="Human-readable scenario name (e.g. 'Diwali at Silk Board')"
+    )
+    latitude: float = Field(..., description="Scenario centre latitude")
+    longitude: float = Field(..., description="Scenario centre longitude")
+    hour: int = Field(..., ge=0, le=23)
+    day_of_week: int = Field(..., ge=0, le=6)
+    month: int = Field(..., ge=1, le=12)
+    zone: str = Field(..., description="Traffic zone code or name")
+    junction: str = Field(..., description="Junction name")
+    police_station: str = Field("", description="Nearest police station")
+    priority: str = Field("High", description="'High' or 'Low'")
+    requires_road_closure: bool = False
+    event_cause: Optional[str] = Field(
+        None, description="Optional cause; if omitted the ML model predicts it"
+    )
+    crowd_estimate: Optional[int] = Field(
+        None, ge=0, description="Optional crowd-size hint (model estimate)"
     )
 
 
@@ -557,6 +581,139 @@ async def get_label_encoders() -> dict[str, Any]:
             detail="Label encoders not available. Run preprocessing first.",
         )
     return _state["label_encoders"]
+
+
+# ---- 8. GET /dashboard ---------------------------------------------
+
+
+@app.get(
+    "/dashboard",
+    summary="Command Center dashboard aggregate",
+    tags=["Dashboard"],
+)
+async def get_dashboard() -> dict[str, Any]:
+    """Real-time-style dashboard aggregate.
+
+    Derived from events_clean.csv anchored at the most recent event timestamp
+    (the dataset is historical; this presents the latest operational picture).
+    """
+    try:
+        from ml.analytics import build_dashboard
+        return build_dashboard()
+    except FileNotFoundError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Dashboard data unavailable. {exc}",
+        ) from exc
+    except Exception as exc:
+        logger.exception("Dashboard build failed.")
+        raise HTTPException(
+            status_code=500, detail=f"Dashboard build failed: {exc}"
+        ) from exc
+
+
+# ---- 9. GET /intelligence ------------------------------------------
+
+
+@app.get(
+    "/intelligence",
+    summary="Historical analytics with filters",
+    tags=["Analytics"],
+)
+async def get_intelligence(
+    request: Request,
+    cause: Optional[str] = None,
+    zone: Optional[str] = None,
+) -> dict[str, Any]:
+    """Filtered historical analytics: monthly trends, weekday/weekend,
+    zone distribution, cause distribution, recent events table.
+
+    Accepts ``cause``, ``zone``, ``from`` (ISO date), ``to`` (ISO date) as
+    query parameters. Filters apply without reloading.
+    """
+    try:
+        from ml.analytics import build_intelligence
+        qp = request.query_params
+        filters = {
+            "cause": cause,
+            "zone": zone,
+            "from": qp.get("from"),
+            "to": qp.get("to"),
+        }
+        return build_intelligence(filters)
+    except FileNotFoundError as exc:
+        raise HTTPException(
+            status_code=404, detail=f"Intelligence data unavailable. {exc}"
+        ) from exc
+    except Exception as exc:
+        logger.exception("Intelligence build failed.")
+        raise HTTPException(
+            status_code=500, detail=f"Intelligence build failed: {exc}"
+        ) from exc
+
+
+# ---- 10. GET /hotspots/extended ------------------------------------
+
+
+@app.get(
+    "/hotspots/extended",
+    summary="Hotspots with geo + severity + trend",
+    tags=["Hotspots"],
+)
+async def get_hotspots_extended() -> dict[str, Any]:
+    """Extended hotspot view: real lat/lng per junction, severity band,
+    7-day incident trend, and AI recommendation per hotspot."""
+    try:
+        from ml.analytics import build_hotspots_extended
+        return build_hotspots_extended()
+    except FileNotFoundError as exc:
+        raise HTTPException(
+            status_code=404, detail=f"Hotspot data unavailable. {exc}"
+        ) from exc
+    except Exception as exc:
+        logger.exception("Hotspots extended build failed.")
+        raise HTTPException(
+            status_code=500, detail=f"Hotspots build failed: {exc}"
+        ) from exc
+
+
+# ---- 11. POST /resource-plan ---------------------------------------
+
+
+@app.post(
+    "/resource-plan",
+    summary="AI-generated deployment plan for a scenario",
+    tags=["Resources"],
+)
+async def resource_plan(request: ResourcePlanRequest) -> dict[str, Any]:
+    """Build a deployment plan (officers, barricades, ERTs, diversion routes,
+    phased timeline) for a chosen scenario.
+
+    Chains the existing prediction → impact → resource pipeline and wraps it
+    into a zone-level deployment plan derived from real junction data.
+    """
+    try:
+        from ml.analytics import build_resource_plan
+        return build_resource_plan(
+            label=request.label,
+            latitude=request.latitude,
+            longitude=request.longitude,
+            hour=request.hour,
+            day_of_week=request.day_of_week,
+            month=request.month,
+            zone=request.zone,
+            junction=request.junction,
+            police_station=request.police_station,
+            priority=request.priority,
+            requires_road_closure=request.requires_road_closure,
+            event_cause=request.event_cause,
+            crowd_estimate=request.crowd_estimate,
+        )
+    except Exception as exc:
+        logger.exception("Resource plan build failed.")
+        raise HTTPException(
+            status_code=500, detail=f"Resource plan failed: {exc}"
+        ) from exc
 
 
 # ---- 7. GET /health -------------------------------------------------
