@@ -65,6 +65,7 @@ FORECAST_MODEL_MAP: dict[str, str] = {
     "prophet": "prophet_xgb_seasonal",
     "hybrid": "hybrid_hotspot",
     "lstm": "lstm_congestion",
+    "random_forest": "random_forest",
 }
 
 # Map of internal names → display names + training commands
@@ -167,6 +168,36 @@ def _load_forecast_models() -> None:
             logger.info("Loaded forecast model: %s", internal_name)
         except Exception as exc:
             logger.warning("Failed to load forecast model '%s': %s", internal_name, exc)
+
+    # Load random forest classifier metrics if present
+    rf_metrics_path = _MODEL_DIR / "training_metrics.json"
+    if rf_metrics_path.is_file():
+        try:
+            rf_metrics = _load_json_file(rf_metrics_path)
+            event_classifier_path = _MODEL_DIR / "event_classifier.pkl"
+            trained_at = None
+            if event_classifier_path.is_file():
+                trained_at = datetime.fromtimestamp(
+                    event_classifier_path.stat().st_mtime, tz=timezone.utc
+                ).isoformat()
+            
+            _state["forecast_models"]["random_forest"] = {
+                "model_name": "random_forest",
+                "display_name": "Random Forest — Live Event Classifier",
+                "trained_at": trained_at,
+                "metrics": rf_metrics,
+                "has_forecast": False,
+                "test_predictions": [],
+                "forecast_24h": [],
+                "feature_importance": {},
+                "extra": {
+                    "display_name": "Random Forest — Live Event Classifier",
+                }
+            }
+            loaded += 1
+            logger.info("Loaded Random Forest classifier metrics.")
+        except Exception as exc:
+            logger.warning("Failed to load Random Forest metrics: %s", exc)
 
     if loaded == 0:
         logger.info("No forecast models trained yet. Run: make train-all")
