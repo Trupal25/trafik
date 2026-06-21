@@ -1,0 +1,419 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   UrbanPulse AI — Design System
+   Register: product / Control-room surface
+   Strategy: Restrained warm-graphite baseline + Committed severity semantics
+   Forced dark. No light theme ships.
+   All colors OKLCH. Neutrals tinted toward hue 40 (warm) at low chroma.
+   ============================================================ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Severity semantics — committed vocabulary, meaning only */
+  --color-critical: var(--critical);
+  --color-critical-fg: var(--critical-fg);
+  --color-critical-bg: var(--critical-bg);
+  --color-high: var(--high);
+  --color-high-fg: var(--high-fg);
+  --color-high-bg: var(--high-bg);
+  --color-medium: var(--medium);
+  --color-medium-fg: var(--medium-fg);
+  --color-medium-bg: var(--medium-bg);
+  --color-low: var(--low);
+  --color-low-fg: var(--low-fg);
+  --color-low-bg: var(--low-bg);
+
+  /* Chart palette — saffron lead, severity-aware, one distinct cool */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-track: var(--chart-track);
+
+  /* Sidebar — deeper than content surface, same warm hue */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-heading);
+
+  /* Tight, technical radii. Buttons stay sharp via their own class. */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --radius-2xl: 8px;
+  --radius-3xl: 12px;
+  --radius-4xl: 16px;
+}
+
+/* ------------------------------------------------------------
+   :root is the ONLY theme. Forced dark — the spec mandates it.
+   The `.dark` class is added to <html> purely so shadcn `dark:`
+   utilities resolve correctly; the values are identical.
+   ------------------------------------------------------------ */
+:root,
+.dark {
+  /* Warm graphite neutrals — hue 40 (amber-leaning), chroma ~0.008 */
+  --background: oklch(0.17 0.008 40);
+  --foreground: oklch(0.94 0.012 40);
+  --card: oklch(0.21 0.008 40);
+  --card-foreground: oklch(0.94 0.012 40);
+  --popover: oklch(0.21 0.008 40);
+  --popover-foreground: oklch(0.94 0.012 40);
+
+  /* Saffron-amber accent — the single committed color */
+  --primary: oklch(0.80 0.15 75);
+  --primary-foreground: oklch(0.17 0.008 40);
+
+  --secondary: oklch(0.26 0.008 40);
+  --secondary-foreground: oklch(0.92 0.012 40);
+  --muted: oklch(0.24 0.008 40);
+  --muted-foreground: oklch(0.62 0.012 40);
+  --accent: oklch(0.28 0.01 40);
+  --accent-foreground: oklch(0.95 0.012 40);
+
+  /* Destructive aliases critical */
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: oklch(0.96 0.02 25);
+
+  --border: oklch(0.32 0.008 40 / 55%);
+  --input: oklch(0.28 0.008 40);
+  --ring: oklch(0.80 0.15 75);
+
+  /* Severity — four committed roles */
+  --critical: oklch(0.62 0.21 25);
+  --critical-fg: oklch(0.95 0.04 25);
+  --critical-bg: oklch(0.62 0.21 25 / 14%);
+  --high: oklch(0.72 0.16 58);
+  --high-fg: oklch(0.95 0.04 58);
+  --high-bg: oklch(0.72 0.16 58 / 14%);
+  --medium: oklch(0.82 0.14 88);
+  --medium-fg: oklch(0.20 0.03 88);
+  --medium-bg: oklch(0.82 0.14 88 / 14%);
+  --low: oklch(0.68 0.13 238);
+  --low-fg: oklch(0.95 0.03 238);
+  --low-bg: oklch(0.68 0.13 238 / 14%);
+
+  /* Charts — saffron lead, severity colors for stacked data, one cool */
+  --chart-1: oklch(0.80 0.15 75);   /* saffron — primary series */
+  --chart-2: oklch(0.62 0.21 25);   /* critical red */
+  --chart-3: oklch(0.72 0.16 58);   /* high orange */
+  --chart-4: oklch(0.68 0.13 238);  /* low blue */
+  --chart-5: oklch(0.68 0.12 178);  /* data teal */
+  --chart-grid: oklch(0.32 0.008 40 / 45%);
+  --chart-track: oklch(0.26 0.008 40);
+
+  /* Sidebar — one step deeper, same warmth */
+  --sidebar: oklch(0.14 0.008 40);
+  --sidebar-foreground: oklch(0.90 0.012 40);
+  --sidebar-primary: oklch(0.80 0.15 75);
+  --sidebar-primary-foreground: oklch(0.17 0.008 40);
+  --sidebar-accent: oklch(0.22 0.01 40);
+  --sidebar-accent-foreground: oklch(0.95 0.012 40);
+  --sidebar-border: oklch(0.30 0.008 40 / 40%);
+  --sidebar-ring: oklch(0.80 0.15 75);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/40;
+  }
+  html {
+    @apply font-sans;
+    color-scheme: dark;
+    /* Next 16 no longer overrides scroll-behavior; we want instant nav. */
+    scroll-behavior: auto;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11", "tnum";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Mono fallback for data cells, timestamps, coordinates */
+  .font-mono,
+  [data-mono] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ============================================================
+   Component utilities — thin, intentional, reusable
+   ============================================================ */
+
+@layer components {
+  /* Surface panel — the workhorse container. No shadow, hairline border,
+     slight inner top highlight for a "screen" feel. NOT a card grid unit. */
+  .surface {
+    @apply rounded-md border border-border bg-card;
+    background-image: linear-gradient(
+      to bottom,
+      oklch(1 0 0 / 0.025),
+      transparent 40%
+    );
+  }
+
+  /* Raised surface — for popovers, dropdowns, the detail panel */
+  .surface-raised {
+    @apply rounded-lg border border-border bg-popover;
+    box-shadow:
+      0 1px 0 0 oklch(1 0 0 / 0.04) inset,
+      0 12px 32px -12px oklch(0 0 0 / 0.6);
+  }
+
+  /* Metadata label — uppercase, tracked, mono-feeling. For KPI captions,
+     table headers, axis labels. */
+  .label-meta {
+    @apply font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground;
+  }
+
+  /* Section eyebrow — slightly larger, for panel titles */
+  .label-section {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground;
+  }
+
+  /* Severity badge — uses the committed vocabulary consistently */
+  .sev {
+    @apply inline-flex items-center gap-1.5 rounded-sm border px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em];
+  }
+  .sev-critical {
+    color: var(--critical);
+    background: var(--critical-bg);
+    border-color: oklch(0.62 0.21 25 / 35%);
+  }
+  .sev-high {
+    color: var(--high);
+    background: var(--high-bg);
+    border-color: oklch(0.72 0.16 58 / 35%);
+  }
+  .sev-medium {
+    color: var(--medium);
+    background: var(--medium-bg);
+    border-color: oklch(0.82 0.14 88 / 35%);
+  }
+  .sev-low {
+    color: var(--low);
+    background: var(--low-bg);
+    border-color: oklch(0.68 0.13 238 / 35%);
+  }
+
+  /* Pulsing live dot — for the LIVE indicator, active markers, "live" rows */
+  .live-dot {
+    @apply relative inline-flex h-1.5 w-1.5 rounded-full bg-primary;
+  }
+  .live-dot::after {
+    content: "";
+    @apply absolute inset-0 rounded-full bg-primary;
+    animation: pulse-ring 2s ease-out infinite;
+  }
+}
+
+/* ============================================================
+   Animations — state, not decoration. Short, ease-out, no bounce.
+   ============================================================ */
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-marker {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.75;
+  }
+}
+
+@keyframes feed-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-feed-in {
+  animation: feed-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Skeleton shimmer — used for loading states, never spinners-in-content */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    oklch(0.24 0.008 40) 0%,
+    oklch(0.30 0.008 40) 50%,
+    oklch(0.24 0.008 40) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  @apply rounded-sm;
+}
+
+/* ============================================================
+   Scrollbars — thin, themed, low-contrast. Not a design feature.
+   ============================================================ */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.32 0.008 40) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: oklch(0.32 0.008 40);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.40 0.008 40);
+}
+
+/* ============================================================
+   MapLibre overrides — make the map read as part of the surface,
+   not a third-party widget bolted on.
+   ============================================================ */
+
+.maplibregl-map {
+  font-family: var(--font-sans);
+  background: var(--background);
+}
+.maplibregl-ctrl-attrib {
+  @apply rounded-sm;
+  background: oklch(0.17 0.008 40 / 80%) !important;
+  color: oklch(0.55 0.012 40) !important;
+  font-size: 9px !important;
+}
+.maplibregl-ctrl-attrib a {
+  color: oklch(0.70 0.012 40) !important;
+}
+.maplibregl-ctrl-group {
+  background: oklch(0.21 0.008 40) !important;
+  border: 1px solid oklch(0.32 0.008 40 / 55%) !important;
+  border-radius: 3px !important;
+  overflow: hidden;
+}
+.maplibregl-ctrl-group button {
+  background: transparent !important;
+  border-bottom: 1px solid oklch(0.32 0.008 40 / 40%) !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+.maplibregl-ctrl-group button:hover {
+  background: oklch(0.28 0.01 40) !important;
+}
+.maplibregl-ctrl-group button svg {
+  fill: oklch(0.78 0.04 40) !important;
+}
+.maplibregl-ctrl-icon {
+  filter: none;
+}
+.maplibregl-popup-content {
+  background: var(--popover) !important;
+  color: var(--popover-foreground) !important;
+  border: 1px solid var(--border);
+  border-radius: 4px !important;
+  padding: 10px 12px !important;
+  font-size: 12px;
+}
+.maplibregl-popup-tip {
+  border-top-color: var(--border) !important;
+  border-bottom-color: var(--border) !important;
+}
+
+/* Hide focus outlines on non-keyboard nav; preserve for keyboard */
+.maplibregl-ctrl:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Recharts tooltip + cursor — match the surface */
+.recharts-tooltip-cursor {
+  fill: oklch(0.80 0.15 75 / 8%) !important;
+}
+.recharts-default-tooltip {
+  background: var(--popover) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px !important;
+  padding: 8px 10px !important;
+}
+.recharts-cartesian-axis-tick text {
+  fill: oklch(0.55 0.012 40) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+}
+.recharts-cartesian-grid line {
+  stroke: var(--chart-grid) !important;
+}
+.recharts-text {
+  font-family: var(--font-mono);
+}
