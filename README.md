@@ -1,3 +1,13 @@
+---
+title: ASTraM API
+emoji: 🚦
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # ASTraM Intelligence
 
 Traffic event intelligence platform for Bengaluru — ML-powered event prediction, impact scoring, resource allocation, and a real-time command dashboard.
