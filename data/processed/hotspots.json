@@ -1,0 +1,433 @@
+[
+  {
+    "junction_code": 0,
+    "total_incidents": 5661,
+    "cause_breakdown": {
+      "vehicle_breakdown": 3172,
+      "others": 426,
+      "water_logging": 411,
+      "pot_holes": 364,
+      "construction": 362,
+      "accident": 272,
+      "tree_fall": 264,
+      "congestion": 122,
+      "road_conditions": 115,
+      "public_event": 59,
+      "procession": 55,
+      "vip_movement": 19,
+      "protest": 10,
+      "debris": 8,
+      "fog_low_visibility": 2
+    },
+    "pct_road_closure": 8.28,
+    "mean_priority": 1.57,
+    "mean_duration_mins": 4543.0,
+    "junction": "unknown"
+  },
+  {
+    "junction_code": 176,
+    "total_incidents": 64,
+    "cause_breakdown": {
+      "vehicle_breakdown": 55,
+      "others": 5,
+      "road_conditions": 3,
+      "congestion": 1
+    },
+    "pct_road_closure": 1.56,
+    "mean_priority": 1.98,
+    "mean_duration_mins": null,
+    "junction": "MekhriCircle"
+  },
+  {
+    "junction_code": 21,
+    "total_incidents": 49,
+    "cause_breakdown": {
+      "pot_holes": 37,
+      "vehicle_breakdown": 11,
+      "others": 1
+    },
+    "pct_road_closure": 2.04,
+    "mean_priority": 1.98,
+    "mean_duration_mins": null,
+    "junction": "AyyappaTempleJunc"
+  },
+  {
+    "junction_code": 242,
+    "total_incidents": 43,
+    "cause_breakdown": {
+      "vehicle_breakdown": 40,
+      "others": 3
+    },
+    "pct_road_closure": 2.33,
+    "mean_priority": 1.98,
+    "mean_duration_mins": null,
+    "junction": "SatteliteBusStandJunc"
+  },
+  {
+    "junction_code": 293,
+    "total_incidents": 38,
+    "cause_breakdown": {
+      "vehicle_breakdown": 33,
+      "others": 2,
+      "water_logging": 1,
+      "tree_fall": 1,
+      "accident": 1
+    },
+    "pct_road_closure": 2.63,
+    "mean_priority": 1.95,
+    "mean_duration_mins": null,
+    "junction": "YeshwanthpuraCircle"
+  },
+  {
+    "junction_code": 291,
+    "total_incidents": 34,
+    "cause_breakdown": {
+      "vehicle_breakdown": 21,
+      "water_logging": 5,
+      "accident": 3,
+      "construction": 3,
+      "others": 1,
+      "road_conditions": 1
+    },
+    "pct_road_closure": 0.0,
+    "mean_priority": 1.91,
+    "mean_duration_mins": null,
+    "junction": "YelhankaCircle"
+  },
+  {
+    "junction_code": 252,
+    "total_incidents": 33,
+    "cause_breakdown": {
+      "vehicle_breakdown": 20,
+      "pot_holes": 5,
+      "construction": 4,
+      "others": 2,
+      "road_conditions": 1,
+      "accident": 1
+    },
+    "pct_road_closure": 12.12,
+    "mean_priority": 2.0,
+    "mean_duration_mins": 4.76,
+    "junction": "SilkBoardJunc"
+  },
+  {
+    "junction_code": 294,
+    "total_incidents": 33,
+    "cause_breakdown": {
+      "vehicle_breakdown": 26,
+      "others": 6,
+      "accident": 1
+    },
+    "pct_road_closure": 6.06,
+    "mean_priority": 1.97,
+    "mean_duration_mins": null,
+    "junction": "toll gate mysore road"
+  },
+  {
+    "junction_code": 123,
+    "total_incidents": 32,
+    "cause_breakdown": {
+      "vehicle_breakdown": 29,
+      "accident": 2,
+      "others": 1
+    },
+    "pct_road_closure": 0.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "JalahalliCross(SM Circle)"
+  },
+  {
+    "junction_code": 194,
+    "total_incidents": 32,
+    "cause_breakdown": {
+      "vehicle_breakdown": 16,
+      "others": 8,
+      "construction": 5,
+      "road_conditions": 1,
+      "congestion": 1,
+      "public_event": 1
+    },
+    "pct_road_closure": 6.25,
+    "mean_priority": 2.0,
+    "mean_duration_mins": 4873.09,
+    "junction": "Nagavara-ORR Junction"
+  },
+  {
+    "junction_code": 129,
+    "total_incidents": 31,
+    "cause_breakdown": {
+      "vehicle_breakdown": 17,
+      "others": 6,
+      "water_logging": 4,
+      "accident": 2,
+      "pot_holes": 1,
+      "procession": 1
+    },
+    "pct_road_closure": 29.03,
+    "mean_priority": 1.0,
+    "mean_duration_mins": null,
+    "junction": "K R Circle"
+  },
+  {
+    "junction_code": 133,
+    "total_incidents": 31,
+    "cause_breakdown": {
+      "vehicle_breakdown": 22,
+      "others": 6,
+      "congestion": 1,
+      "procession": 1,
+      "accident": 1
+    },
+    "pct_road_closure": 6.45,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "KIMCO Junction"
+  },
+  {
+    "junction_code": 73,
+    "total_incidents": 30,
+    "cause_breakdown": {
+      "vehicle_breakdown": 22,
+      "others": 4,
+      "water_logging": 4
+    },
+    "pct_road_closure": 13.33,
+    "mean_priority": 1.0,
+    "mean_duration_mins": null,
+    "junction": "Devasandra(k r puram)"
+  },
+  {
+    "junction_code": 103,
+    "total_incidents": 30,
+    "cause_breakdown": {
+      "vehicle_breakdown": 27,
+      "others": 2,
+      "accident": 1
+    },
+    "pct_road_closure": 3.33,
+    "mean_priority": 1.93,
+    "mean_duration_mins": null,
+    "junction": "HesaraghattaJunction"
+  },
+  {
+    "junction_code": 269,
+    "total_incidents": 30,
+    "cause_breakdown": {
+      "vehicle_breakdown": 29,
+      "others": 1
+    },
+    "pct_road_closure": 6.67,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "TownhallJunction"
+  },
+  {
+    "junction_code": 280,
+    "total_incidents": 30,
+    "cause_breakdown": {
+      "construction": 13,
+      "vehicle_breakdown": 6,
+      "accident": 5,
+      "others": 3,
+      "pot_holes": 2,
+      "road_conditions": 1
+    },
+    "pct_road_closure": 23.33,
+    "mean_priority": 2.0,
+    "mean_duration_mins": 436.15,
+    "junction": "VeerannapalyaJunction(BEL,HO)"
+  },
+  {
+    "junction_code": 149,
+    "total_incidents": 29,
+    "cause_breakdown": {
+      "pot_holes": 18,
+      "vehicle_breakdown": 6,
+      "road_conditions": 3,
+      "construction": 2
+    },
+    "pct_road_closure": 0.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "KoramangalaWaterTankJunc"
+  },
+  {
+    "junction_code": 91,
+    "total_incidents": 28,
+    "cause_breakdown": {
+      "vehicle_breakdown": 27,
+      "accident": 1
+    },
+    "pct_road_closure": 0.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "GokuldasImagesJunc"
+  },
+  {
+    "junction_code": 100,
+    "total_incidents": 28,
+    "cause_breakdown": {
+      "vehicle_breakdown": 13,
+      "road_conditions": 6,
+      "construction": 6,
+      "pot_holes": 2,
+      "others": 1
+    },
+    "pct_road_closure": 14.29,
+    "mean_priority": 2.0,
+    "mean_duration_mins": 153.06,
+    "junction": "HebbalFlyoverJunc"
+  },
+  {
+    "junction_code": 30,
+    "total_incidents": 27,
+    "cause_breakdown": {
+      "vehicle_breakdown": 18,
+      "others": 6,
+      "construction": 2,
+      "accident": 1
+    },
+    "pct_road_closure": 3.7,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "BagalurCrossJunc"
+  },
+  {
+    "junction_code": 45,
+    "total_incidents": 26,
+    "cause_breakdown": {
+      "vehicle_breakdown": 22,
+      "tree_fall": 1,
+      "pot_holes": 1,
+      "others": 1,
+      "construction": 1
+    },
+    "pct_road_closure": 3.85,
+    "mean_priority": 1.92,
+    "mean_duration_mins": null,
+    "junction": "BigBazaarJunction(OldMadrasRd)"
+  },
+  {
+    "junction_code": 50,
+    "total_incidents": 26,
+    "cause_breakdown": {
+      "vehicle_breakdown": 16,
+      "pot_holes": 6,
+      "accident": 1,
+      "water_logging": 1,
+      "others": 1,
+      "procession": 1
+    },
+    "pct_road_closure": 0.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "Bommanahalli"
+  },
+  {
+    "junction_code": 213,
+    "total_incidents": 26,
+    "cause_breakdown": {
+      "vehicle_breakdown": 24,
+      "construction": 1,
+      "protest": 1
+    },
+    "pct_road_closure": 15.38,
+    "mean_priority": 1.88,
+    "mean_duration_mins": 10172.79,
+    "junction": "PoliceCornerJunc"
+  },
+  {
+    "junction_code": 23,
+    "total_incidents": 25,
+    "cause_breakdown": {
+      "vehicle_breakdown": 16,
+      "others": 4,
+      "construction": 3,
+      "congestion": 1,
+      "road_conditions": 1
+    },
+    "pct_road_closure": 8.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": 0.55,
+    "junction": "BEL Circle"
+  },
+  {
+    "junction_code": 240,
+    "total_incidents": 25,
+    "cause_breakdown": {
+      "vehicle_breakdown": 17,
+      "construction": 6,
+      "others": 1,
+      "accident": 1
+    },
+    "pct_road_closure": 20.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": 300.83,
+    "junction": "SantheCircle"
+  },
+  {
+    "junction_code": 145,
+    "total_incidents": 23,
+    "cause_breakdown": {
+      "vehicle_breakdown": 18,
+      "others": 4,
+      "pot_holes": 1
+    },
+    "pct_road_closure": 4.35,
+    "mean_priority": 1.0,
+    "mean_duration_mins": null,
+    "junction": "KhodaysCircle(DV UrsCircle)"
+  },
+  {
+    "junction_code": 226,
+    "total_incidents": 22,
+    "cause_breakdown": {
+      "vehicle_breakdown": 19,
+      "others": 2,
+      "accident": 1
+    },
+    "pct_road_closure": 18.18,
+    "mean_priority": 1.91,
+    "mean_duration_mins": null,
+    "junction": "RajeshwariJunc"
+  },
+  {
+    "junction_code": 159,
+    "total_incidents": 21,
+    "cause_breakdown": {
+      "vehicle_breakdown": 15,
+      "procession": 4,
+      "others": 2
+    },
+    "pct_road_closure": 14.29,
+    "mean_priority": 2.0,
+    "mean_duration_mins": 161.25,
+    "junction": "LeprosyhospitalJunc"
+  },
+  {
+    "junction_code": 56,
+    "total_incidents": 20,
+    "cause_breakdown": {
+      "pot_holes": 8,
+      "vehicle_breakdown": 8,
+      "water_logging": 2,
+      "others": 2
+    },
+    "pct_road_closure": 15.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "CMP GateJunc"
+  },
+  {
+    "junction_code": 94,
+    "total_incidents": 20,
+    "cause_breakdown": {
+      "vehicle_breakdown": 19,
+      "accident": 1
+    },
+    "pct_road_closure": 5.0,
+    "mean_priority": 2.0,
+    "mean_duration_mins": null,
+    "junction": "GoruguntepalyaJunc"
+  }
+]

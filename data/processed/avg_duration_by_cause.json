@@ -1,0 +1,17 @@
+{
+  "accident": 12077.81,
+  "congestion": null,
+  "construction": 11185.09,
+  "debris": null,
+  "fog_low_visibility": null,
+  "others": 0.03,
+  "pot_holes": 2.35,
+  "procession": 879.09,
+  "protest": 5247.45,
+  "public_event": 2508.98,
+  "road_conditions": null,
+  "tree_fall": 1.92,
+  "vehicle_breakdown": 9612.31,
+  "vip_movement": 10032.97,
+  "water_logging": 474854.92
+}

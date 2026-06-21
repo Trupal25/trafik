@@ -14,9 +14,8 @@ build/
 # Large uncompressed model — use .pkl.gz instead (tracked)
 ml/models/event_classifier.pkl
 
-# Data (large files)
+# Data — raw is large/optional, processed is small and needed by API
 data/raw/
-data/processed/
 
 # Node / Next.js
 node_modules/
